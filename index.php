@@ -5126,15 +5126,9 @@
             		<h3>Information about patient and organzation</h3><br>
 
             		<div class="form-group">
-            			<label for="exampleInputAvailable">Number of Uses Available</label>
-            			<input type="text" class="form-control" id="exampleInputAvailable" aria-describedby="" placeholder="0">
-            			<small id="" class="form-text text-muted">Здесь можно написать какую-нибудь подсказку*</small>
-            		</div>
-
-            		<div class="form-group">
             			<label for="exampleInputId">ID</label>
             			<input type="text" class="form-control" id="exampleInputId" aria-describedby="" placeholder="AAA000300">
-
+                                <small id="" class="form-text text-muted">Здесь можно написать какую-нибудь подсказку*</small>
             		</div>
 
             		<div class="form-group">
@@ -5211,10 +5205,8 @@
 
               <section class="" id="">
               	<div class="container">
-              		<h2>/Шаг 4</h2>
-              		<h3>Generation of Report</h3>
+              		
               		<br>
-
 
               		<button type="button" class="btn btn-dark btn-lg btn-block"
               		style="background-color: #4B7872; color: #FFFFFF; border: solid 1px #4B7872;">Сформировать
