@@ -20,6 +20,8 @@ $(document).ready(function(){
           $('.list-group').html(response.data);
         }else if (response.type == 'tableData'){
           $('.tab-pane').find('table').find('tbody').html(response.data);
+        } else if (response.type = 'popsData'){
+          $('.modals').html(response.data);
         }
         
         clearArray(data);
@@ -32,7 +34,19 @@ $(document).ready(function(){
   setTimeout( () => { 
     loadData('loadTable', new Array({geneName : $('.list-group-item.active').text()}));
   }, 50);
+  
+  let getAllDrugGroups = () => {
+    let drugGroupsArr = new Array();
 
+    $.each($('.someclass'), (indexInArray, valueOfElement) => { 
+       drugGroupsArr.push($(valueOfElement).data('specialization-name').toLowerCase());
+    });
+
+    return drugGroupsArr;
+  }
+
+  loadData('loadPops', getAllDrugGroups());
+  
   $(document).on('click', '.nav-link', (e) => {
     e.preventDefault();
 
