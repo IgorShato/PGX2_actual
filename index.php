@@ -111,40 +111,40 @@
         (Specialization)
         <input type="checkbox" name="(Specialization name)">
       </button>
-      <button type="button" class="btn someclass" data-toggle="modal" data-target="#neurology" data-specialization-name="neurology"> Neurology
+      <button type="button" class="btn someclass" data-toggle="modal" data-target="#neurology" data-specialization-name="neurology"> NEUROLOGY
         (Specialization)
         <input type="checkbox" name="(Specialization name)">
       </button>
-      <button type="button" class="btn someclass" data-toggle="modal" data-target="#cardiology" data-specialization-name="cardiology"> Cardiology
+      <button type="button" class="btn someclass" data-toggle="modal" data-target="#cardiology" data-specialization-name="cardiology"> CARDIOLOGY
         (Specialization)
         <input type="checkbox" name="(Specialization name)">
       </button>
-      <button type="button" class="btn someclass" data-toggle="modal" data-target="#allergology" data-specialization-name="allergology"> Allergology
+      <button type="button" class="btn someclass" data-toggle="modal" data-target="#allergology" data-specialization-name="allergology"> ALLERGOLOGY
         (Specialization)
         <input type="checkbox" name="(Specialization name)">
       </button>
 
       <button type="button" class="btn someclass" data-toggle="modal" data-target="#gastroenterology" data-specialization-name="gastroenterology">
-        Gastroenterology (Specialization)
+        GASTROENTEROLOGY (Specialization)
         <input type="checkbox" name="(Specialization name)">
       </button>
 
-      <button type="button" class="btn someclass" data-toggle="modal" data-target="#endocrinology" data-specialization-name="endocrinology"> Endocrinology
+      <button type="button" class="btn someclass" data-toggle="modal" data-target="#endocrinology" data-specialization-name="endocrinology"> ENDOCRILOGY
         (Specialization)
         <input type="checkbox" name="(Specialization name)">
       </button>
 
-      <button type="button" class="btn someclass" data-toggle="modal" data-target="#dermatology" data-specialization-name="dermatology"> Dermatology
+      <button type="button" class="btn someclass" data-toggle="modal" data-target="#dermatology" data-specialization-name="dermatology"> DERMATOLOGY
         (Specialization)
         <input type="checkbox" name="(Specialization name)">
       </button>
 
-      <button type="button" class="btn someclass" data-toggle="modal" data-target="#infections" data-specialization-name="infections"> Infections
+      <button type="button" class="btn someclass" data-toggle="modal" data-target="#infections" data-specialization-name="infections"> INFECTIONS
         (Specialization)
         <input type="checkbox" name="(Specialization name)">
       </button>
 
-      <button type="button" class="btn someclass" data-toggle="modal" data-target="#oncology" data-specialization-name="oncology"> Oncology
+      <button type="button" class="btn someclass" data-toggle="modal" data-target="#oncology" data-specialization-name="oncology"> ONCOLOGY
         (Specialization)
         <input type="checkbox" name="(Specialization name)">
       </button>
