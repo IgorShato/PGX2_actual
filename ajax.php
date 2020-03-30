@@ -1,4 +1,4 @@
- <?php
+   <?php
   $action = $_POST['action'];
 
   include './config.php';
@@ -75,7 +75,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              '.strtoupper($value).'
+
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
@@ -93,25 +93,17 @@
           <div class="card">
             <div class="card-header" id="headingOne">
               <h5 class="mb-0">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse-'.($value1['Group_Name_ru']).($key1 + 1).'"
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse'.($key1 + 1).'"
                   aria-expanded="false" aria-controls="'.($key1 + 1).'">
                   '.$value1['Group_Name_ru'].'
                 </button>
               </h5>
             </div>
 
-            <div id="collapse-'.($value1['Group_Name_ru']).($key1 + 1).'" class="collapse" aria-labelledby="headingOne"
+            <div id="collapse'.($key1 + 1).'" class="collapse" aria-labelledby="headingOne"
               data-parent="#accordionExample">
               <div class="card-body">
-                <style>
-                  .panel>* {
-                    float: left;
-                  }
-
-                  .panel>input {
-                    clear: both;
-                  }
-                </style>';
+';
 
         foreach ($rezult_drugSubgroups as $key2 => $value2){
           $statement = $pdo->prepare("SELECT ID, Drug_Name_ru FROM spec WHERE Subgroup_Name_ru = :subgroup_name");
