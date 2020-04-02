@@ -11,7 +11,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/form.css">
-  <link rel="stylesheet" href="">
 </head>
 
 <body>
@@ -99,54 +98,44 @@
     <div class="container">
       <h2>/Шаг 2</h2>
       <h3>Choose the Groups of Drugs</h3><br>
-      <style>
+      
+        <style>
         .someclass {
           background-color: #4B7872;
           color: #FFFFFF;
           width: 240px;
+          margin: 5px 10px 5px 1px;
         }
       </style>
+      
       <!-- кнопка -->
+      <input class="checkbox__modal" type="checkbox" name="psychiatry">
       <button type="button" class="btn someclass" data-toggle="modal" data-target="#psychiatry" data-specialization-name="psychiatry"> PSYCHIATRY
-        (Specialization)
-        <input type="checkbox" name="(Specialization name)">
       </button>
+      <input class="checkbox__modal" type="checkbox" name="neurology">
       <button type="button" class="btn someclass" data-toggle="modal" data-target="#neurology" data-specialization-name="neurology"> NEUROLOGY
-        (Specialization)
-        <input type="checkbox" name="(Specialization name)">
       </button>
+      <input class="checkbox__modal" type="checkbox" name="cardiology">
       <button type="button" class="btn someclass" data-toggle="modal" data-target="#cardiology" data-specialization-name="cardiology"> CARDIOLOGY
-        (Specialization)
-        <input type="checkbox" name="(Specialization name)">
-      </button>
+      </button><br>
+       <input class="checkbox__modal" type="checkbox" name="allergology">
       <button type="button" class="btn someclass" data-toggle="modal" data-target="#allergology" data-specialization-name="allergology"> ALLERGOLOGY
-        (Specialization)
-        <input type="checkbox" name="(Specialization name)">
       </button>
-
+       <input class="checkbox__modal" type="checkbox" name="gastroenterology">
       <button type="button" class="btn someclass" data-toggle="modal" data-target="#gastroenterology" data-specialization-name="gastroenterology">
-        GASTROENTEROLOGY (Specialization)
-        <input type="checkbox" name="(Specialization name)">
+        GASTROENTEROLOGY
       </button>
-
-      <button type="button" class="btn someclass" data-toggle="modal" data-target="#endocrinology" data-specialization-name="endocrinology"> ENDOCRILOGY
-        (Specialization)
-        <input type="checkbox" name="(Specialization name)">
-      </button>
-
+      <input class="checkbox__modal" type="checkbox" name="endocrinology">
+      <button type="button" class="btn someclass" data-toggle="modal" data-target="#endocrinology" data-specialization-name="endocrinology"> ENDOCRINOLOGY
+      </button><br>
+      <input class="checkbox__modal" type="checkbox" name="dermatology">
       <button type="button" class="btn someclass" data-toggle="modal" data-target="#dermatology" data-specialization-name="dermatology"> DERMATOLOGY
-        (Specialization)
-        <input type="checkbox" name="(Specialization name)">
       </button>
-
+      <input class="checkbox__modal" type="checkbox" name="infections">
       <button type="button" class="btn someclass" data-toggle="modal" data-target="#infections" data-specialization-name="infections"> INFECTIONS
-        (Specialization)
-        <input type="checkbox" name="(Specialization name)">
       </button>
-
+      <input class="checkbox__modal" type="checkbox" name="oncology">
       <button type="button" class="btn someclass" data-toggle="modal" data-target="#oncology" data-specialization-name="oncology"> ONCOLOGY
-        (Specialization)
-        <input type="checkbox" name="(Specialization name)">
       </button>
 
       <!-- окно -->
@@ -377,8 +366,8 @@
   <!--  -->
   <style>
     .panel {
-      padding: 0 18px;
-      background-color: white;
+      padding: 0 20px;
+      background-color: #FFFFFF;
       max-height: 0;
       overflow: hidden;
       transition: max-height 0.2s ease-out;
