@@ -1,4 +1,4 @@
-   <?php
+  <?php
   $action = $_POST['action'];
 
   include './config.php';
@@ -93,6 +93,7 @@
           <div class="card">
             <div class="card-header" id="headingOne">
               <h5 class="mb-0">
+              <input type="checkbox" name="" data-collapse="true" data-collapse-target="collapse'.($key1 + 1).'">
                 <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse'.($key1 + 1).'"
                   aria-expanded="false" aria-controls="'.($key1 + 1).'">
                   '.$value1['Group_Name_ru'].'
@@ -112,6 +113,7 @@
           $rezult_drugName = $statement->fetchAll(PDO::FETCH_ASSOC);
 
           $output .= '
+                <input type="checkbox" name="" id="checkbox">
                 <button class="accordion">'.$value2['Subgroup_Name_ru'].'</button>
                 <div class="panel">';
 
