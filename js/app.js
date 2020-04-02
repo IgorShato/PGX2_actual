@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
   let data = new Array();
 
@@ -22,6 +21,7 @@ $(document).ready(function(){
           $('.tab-pane').find('table').find('tbody').html(response.data);
         } else if (response.type = 'popsData'){
           $('.modals').html(response.data);
+          console.log(response);
         }
         
         clearArray(data);
@@ -77,5 +77,37 @@ $(document).ready(function(){
   let clearArray = (arr) => {
     arr.splice(0, arr.length);
   }
+
+  /**
+   * Checkbox click events
+   */
+
+   $(document).on('change', 'input[type="checkbox"][data-collapse="true"]', (e) => {
+    e.preventDefault();
+    
+    let inputscontainer = $(e.target).closest('.card').find('#' + $(e.target).data('collapse-target'));
+
+    $.each($(inputscontainer).find('input[type="checkbox"]'), function (indexInArray, valueOfElement) { 
+      if ($(e.target).prop('checked')){
+        $(valueOfElement).prop('checked', true);
+      }else{
+        $(valueOfElement).prop('checked', false);
+      }
+    });
+   })
+
+   $(document).on('change', '.checkbox__modal', (e) => {
+    e.preventDefault();
+    
+    let modal = $('#' + $(e.target).attr('name'));
+    
+    $.each(modal.find('input[type="checkbox"]'), function (indexInArray, valueOfElement) { 
+      if ($(e.target).prop('checked')){
+        $(valueOfElement).prop('checked', true);
+      }else{
+        $(valueOfElement).prop('checked', false);
+      }
+    });
+   })
 
 }); 
