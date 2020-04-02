@@ -277,7 +277,7 @@
 
       <div class="form-group">
         <label for="exampleInputAvailable">Number of Uses Available</label>
-        <input type="text" class="form-control" id="exampleInputAvailable" aria-describedby="" placeholder="0">
+        <input type="text" class="form-control" id="exampleInputAvailable" aria-describedby="" placeholder="0" autofocus>
         <small id="" class="form-text text-muted">Здесь можно написать какую-нибудь подсказку*</small>
       </div>
 
