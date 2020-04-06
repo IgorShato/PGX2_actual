@@ -81,8 +81,7 @@
           </div>
         </div>
       </div>
-      <button type="button" class="btn btn-outline-secondary" href="#">&larr; Назад</button>
-      <button type="button" class="btn btn-outline-success" href="#">Дальше &rarr;</button>
+      
     </div>
     </div>
 
@@ -263,8 +262,6 @@
       </div> -->
 
         <br><br>
-        <button type="button" class="btn btn-outline-secondary" href="#">&larr; Назад</button>
-        <button type="button" class="btn btn-outline-success" href="#">Дальше &rarr;</button>
 
   </section>
   <br><br>
@@ -273,65 +270,66 @@
   <section class="" id="">
     <div class="container">
       <h2>/Шаг 3</h2>
-      <h3>Information about patient and organzation</h3><br>
+      <h3>Information about patient and organzation</h3>
+       <small id="" class="form-text text-muted">fields marked with * are required</small>
+      <br>
 
       <div class="form-group">
-        <label for="exampleInputAvailable">Number of Uses Available</label>
-        <input type="text" class="form-control" id="exampleInputAvailable" aria-describedby="" placeholder="0" autofocus>
-        <small id="" class="form-text text-muted">Здесь можно написать какую-нибудь подсказку*</small>
+        <label for="exampleInputAvailable">Number of Uses Available*</label>
+        <input type="text" class="form-control" id="exampleInputAvailable" aria-describedby="" placeholder="0" required autofocus>
       </div>
 
       <div class="form-group">
-        <label for="exampleInputId">ID</label>
-        <input type="text" class="form-control" id="exampleInputId" aria-describedby="" placeholder="AAA000300">
-
-      </div>
-
-      <div class="form-group">
-        <label for="exampleInputSurname">Surname</label>
-        <input type="text" class="form-control" id="exampleInputSurname" aria-describedby="" placeholder="Smith">
+        <label for="exampleInputId">ID*</label>
+        <input type="text" class="form-control" id="exampleInputId" aria-describedby="" placeholder="AAA000300" required>
 
       </div>
 
       <div class="form-group">
-        <label for="exampleInputFirstName">First Name</label>
-        <input type="text" class="form-control" id="exampleInputFirstName" aria-describedby="" placeholder="John">
+        <label for="exampleInputSurname">Surname*</label>
+        <input type="text" class="form-control" id="exampleInputSurname" aria-describedby="" placeholder="Smith" required>
 
       </div>
 
       <div class="form-group">
-        <label for="exampleInputSecondName">Second Name</label>
-        <input type="text" class="form-control" id="exampleInputSecondName" aria-describedby="" placeholder="Adam">
+        <label for="exampleInputFirstName">First Name*</label>
+        <input type="text" class="form-control" id="exampleInputFirstName" aria-describedby="" placeholder="John" required>
 
       </div>
 
       <div class="form-group">
-        <label for="exampleInputBirth">Date of Birth</label>
-        <input type="text" class="form-control" id="exampleInputBirth" aria-describedby="" placeholder="01/01/1980">
+        <label for="exampleInputSecondName">Second Name*</label>
+        <input type="text" class="form-control" id="exampleInputSecondName" aria-describedby="" placeholder="Adam" required>
 
       </div>
 
       <div class="form-group">
-        <label for="exampleInputHeight">Height (cm)</label>
-        <input type="text" class="form-control" id="exampleInputHeight" aria-describedby="" placeholder="170">
+        <label for="exampleInputBirth">Date of Birth*</label>
+        <input type="text" class="form-control" id="exampleInputBirth" aria-describedby="" placeholder="01/01/1980" required>
 
       </div>
 
       <div class="form-group">
-        <label for="exampleInputWeight">Weight (kg)</label>
-        <input type="text" class="form-control" id="exampleInputWeight" aria-describedby="" placeholder="80">
+        <label for="exampleInputHeight">Height (cm)*</label>
+        <input type="text" class="form-control" id="exampleInputHeight" aria-describedby="" placeholder="170" required>
 
       </div>
 
       <div class="form-group">
-        <label for="exampleInputSex">Sex (m/w)</label>
-        <input type="text" class="form-control" id="exampleInputSex" aria-describedby="" placeholder="m">
+        <label for="exampleInputWeight">Weight (kg)*</label>
+        <input type="text" class="form-control" id="exampleInputWeight" aria-describedby="" placeholder="80" required>
 
       </div>
 
       <div class="form-group">
-        <label for="exampleInputRase">Rase</label>
-        <input type="text" class="form-control" id="exampleInputRase" aria-describedby="" placeholder="Caucasian">
+        <label for="exampleInputSex">Sex (m/w)*</label>
+        <input type="text" class="form-control" id="exampleInputSex" aria-describedby="" placeholder="m" required>
+
+      </div>
+
+      <div class="form-group">
+        <label for="exampleInputRase">Rase*</label>
+        <input type="text" class="form-control" id="exampleInputRase" aria-describedby="" placeholder="Europid" required>
 
       </div>
 
