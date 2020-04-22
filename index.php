@@ -18,7 +18,7 @@
   <!-- форма -->
   <!-- шаг 1 -->
 
-  <form action="" id="php/" method="POST"></form>
+  <form action="" id="php/" method="POST">
 
   <section class="" id="">
     <br>
@@ -28,7 +28,6 @@
       <p>Do not change the genotype, if you don’t know it ("wild" types is default).</p><br>
 
       <!-- выбираем направление  -->
-
       <div class="row">
         <div class="col-3">
           <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -47,7 +46,7 @@
           </div>
         </div>
 
-        <!-- выбираем маркер (транспорт) -->
+        <!-- выбираем маркер -->
         <div class="col-6">
           <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
@@ -81,6 +80,8 @@
           </div>
         </div>
       </div>
+      
+     <br>
       
     </div>
     </div>
@@ -262,7 +263,7 @@
       </div> -->
 
         <br><br>
-
+       
   </section>
   <br><br>
   <!-- шаг 3 -->
@@ -271,7 +272,7 @@
     <div class="container">
       <h2>/Шаг 3</h2>
       <h3>Information about patient and organzation</h3>
-       <small id="" class="form-text text-muted">fields marked with * are required</small>
+      <small id="" class="form-text text-muted">fields marked with * are required</small>
       <br>
 
       <div class="form-group">
@@ -336,27 +337,26 @@
       <div class="form-group">
         <label for="exampleInputNameDoctor">Name of Doctor</label>
         <input type="text" class="form-control" id="exampleInputNameDoctor" aria-describedby=""
-          placeholder="Gregory House, MD, PhD, Lab Director for RAS">
+          placeholder="Gregory House, MD, PhD, Lab Director for RAS" required>
 
       </div>
     </div>
   </section>
 
   <br><br>
-  <!-- шаг 4 -->
+  <!-- шаг 4 - сформировать отчет -->
 
   <section class="" id="">
     <div class="container">
-      <h2>/Шаг 4</h2>
-      <h3>Generation of Report</h3>
+      <!--<h2>/Шаг 4</h2>
+      <h3>Generation of Report</h3>-->
       <br>
 
-
-      <button type="button" class="btn btn-dark btn-lg btn-block"
+     <a href="http://pgx2report.testinggo.ru/" class="btn btn-dark btn-lg btn-block" role="button"
         style="background-color: #4B7872; color: #FFFFFF; border: solid 1px #4B7872;">Сформировать
-        отчет</button>
-      <button type="button" class="btn btn-light btn-lg btn-block">Назад</button>
-
+        отчет</a>
+        <br>
+      
     </div>
   </section>
   </form>
@@ -385,7 +385,6 @@
       }
     });
   </script>
-
   <!--  конец формы -->
 
   <!-- JS -->
@@ -400,5 +399,4 @@
   <script src="js/app.js" async></script>
 
 </body>
-
 </html>
