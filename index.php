@@ -18,7 +18,7 @@
   <!-- форма -->
   <!-- шаг 1 -->
 
-  <form action="" id="php/" method="POST">
+  <form action="" id="php/" method="POST"></form>
 
   <section class="" id="">
     <br>
@@ -28,6 +28,7 @@
       <p>Do not change the genotype, if you don’t know it ("wild" types is default).</p><br>
 
       <!-- выбираем направление  -->
+
       <div class="row">
         <div class="col-3">
           <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -46,7 +47,7 @@
           </div>
         </div>
 
-        <!-- выбираем маркер -->
+        <!-- выбираем маркер (транспорт) -->
         <div class="col-6">
           <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
@@ -264,6 +265,7 @@
 
         <br><br>
        
+
   </section>
   <br><br>
   <!-- шаг 3 -->
@@ -276,66 +278,61 @@
       <br>
 
       <div class="form-group">
-        <label for="exampleInputAvailable">Number of Uses Available*</label>
-        <input type="text" class="form-control" id="exampleInputAvailable" aria-describedby="" placeholder="0" required autofocus>
-      </div>
-
-      <div class="form-group">
         <label for="exampleInputId">ID*</label>
         <input type="text" class="form-control" id="exampleInputId" aria-describedby="" placeholder="AAA000300" required>
 
       </div>
 
       <div class="form-group">
-        <label for="exampleInputSurname">Surname*</label>
+        <label for="exampleInputSurname">Фамилия*</label>
         <input type="text" class="form-control" id="exampleInputSurname" aria-describedby="" placeholder="Smith" required>
 
       </div>
 
       <div class="form-group">
-        <label for="exampleInputFirstName">First Name*</label>
+        <label for="exampleInputFirstName">Имя*</label>
         <input type="text" class="form-control" id="exampleInputFirstName" aria-describedby="" placeholder="John" required>
 
       </div>
 
       <div class="form-group">
-        <label for="exampleInputSecondName">Second Name*</label>
+        <label for="exampleInputSecondName">Отчество*</label>
         <input type="text" class="form-control" id="exampleInputSecondName" aria-describedby="" placeholder="Adam" required>
 
       </div>
 
       <div class="form-group">
-        <label for="exampleInputBirth">Date of Birth*</label>
+        <label for="exampleInputBirth">Дата рождения*</label>
         <input type="text" class="form-control" id="exampleInputBirth" aria-describedby="" placeholder="01/01/1980" required>
 
       </div>
 
       <div class="form-group">
-        <label for="exampleInputHeight">Height (cm)*</label>
+        <label for="exampleInputHeight">Рост (см)*</label>
         <input type="text" class="form-control" id="exampleInputHeight" aria-describedby="" placeholder="170" required>
 
       </div>
 
       <div class="form-group">
-        <label for="exampleInputWeight">Weight (kg)*</label>
+        <label for="exampleInputWeight">Вес (кг)*</label>
         <input type="text" class="form-control" id="exampleInputWeight" aria-describedby="" placeholder="80" required>
 
       </div>
 
       <div class="form-group">
-        <label for="exampleInputSex">Sex (m/w)*</label>
+        <label for="exampleInputSex">Пол (м/ж)*</label>
         <input type="text" class="form-control" id="exampleInputSex" aria-describedby="" placeholder="m" required>
 
       </div>
 
       <div class="form-group">
-        <label for="exampleInputRase">Rase*</label>
+        <label for="exampleInputRase">Раса*</label>
         <input type="text" class="form-control" id="exampleInputRase" aria-describedby="" placeholder="Europid" required>
 
       </div>
 
       <div class="form-group">
-        <label for="exampleInputNameDoctor">Name of Doctor</label>
+        <label for="exampleInputNameDoctor">Имя доктора</label>
         <input type="text" class="form-control" id="exampleInputNameDoctor" aria-describedby=""
           placeholder="Gregory House, MD, PhD, Lab Director for RAS" required>
 
@@ -344,13 +341,14 @@
   </section>
 
   <br><br>
-  <!-- шаг 4 - сформировать отчет -->
+  <!-- шаг 4 -сформировать отчет -->
 
   <section class="" id="">
     <div class="container">
       <!--<h2>/Шаг 4</h2>
       <h3>Generation of Report</h3>-->
       <br>
+
 
      <a href="http://pgx2report.testinggo.ru/" class="btn btn-dark btn-lg btn-block" role="button"
         style="background-color: #4B7872; color: #FFFFFF; border: solid 1px #4B7872;">Сформировать
@@ -385,6 +383,7 @@
       }
     });
   </script>
+
   <!--  конец формы -->
 
   <!-- JS -->
@@ -399,4 +398,5 @@
   <script src="js/app.js" async></script>
 
 </body>
+
 </html>
