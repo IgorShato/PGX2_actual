@@ -18,7 +18,7 @@
   <!-- форма -->
   <!-- шаг 1 -->
 
-  <form action="" id="php/" method="POST"></form>
+  <form action="report.php" id="php/" method="POST">
 
   <section class="" id="">
     <br>
@@ -47,43 +47,26 @@
           </div>
         </div>
 
-        <!-- выбираем маркер (транспорт) -->
+        <!-- выбираем маркер -->
         <div class="col-6">
           <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
               <div class="row">
                 <div class="col-4 list-group__container">
-                  <div class="list-group" id="list-tab" role="tablist">
-                  </div>
                 </div>
                 <div class="col-8">
                   <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="list-transport1" role="tabpanel"
-                      aria-labelledby="list-home-list">
-                      <table>
-                        <thead>
-                          <tr>
-                            <td class="td_head">Nucleotide Change</td>
-                            <td class="td_head">Allele Variant</td>
-                            <td class="td_head">rs</td>
-                            <td class="td_head">Genotype</td>
-                            <td class="td_head">Include in Report</td>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                      </table>
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      
-     <br>
-      
+      </div><br>
+      <!-- 
+      <button type="button" class="btn btn-outline-secondary" href="#">&larr; Назад</button>
+      <button type="button" class="btn btn-outline-success" href="#">Дальше &rarr;</button>
+      -->
     </div>
     </div>
 
@@ -152,119 +135,8 @@
       <div class="modals">
           
       </div>
-      <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="accordion" id="accordionExample">
-                <div class="card">
-                  <div class="card-header" id="headingOne">
-                    <h5 class="mb-0">
-                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                        aria-expanded="true" aria-controls="collapseOne">
-                        Антипсихотики (Group_Name_ru)
-                      </button>
-                    </h5>
-                  </div>
-
-                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                    data-parent="#accordionExample">
-                    <div class="card-body">
-                      <style>
-                        .panel>* {
-                          float: left;
-                        }
-
-                        .panel>input {
-                          clear: both;
-                        }
-                      </style>
-                      <button class="accordion">Subgroup_Name_ru</button>
-                      <div class="panel">
-                        <input type="checkbox" id="ID1" name="ID1" /><label for="ID1">(Drug_Name_ru)</label>
-                        <input type="checkbox" id="ID2" name="ID2" /><label for="ID2">(Drug_Name_ru)</label>
-                        <input type="checkbox" id="ID3" name="ID3" /><label for="ID3">(Drug_Name_ru)</label>
-                        <input type="checkbox" id="ID4" name="ID4" /><label for="ID4">(Drug_Name_ru)</label>
-                        <input type="checkbox" id="ID5" name="ID5" /><label for="ID5">(Drug_Name_ru)</label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="headingTwo">
-                    <h5 class="mb-0">
-                      <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                        data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Антидепрессанты
-                      </button>
-                    </h5>
-                  </div>
-                  <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                    <div class="card-body">
-                      <button class="accordion">Subgroup_Name_ru</button>
-                      <div class="panel">
-                        <p>Drug_Name_ru</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                      <button class="btn btn-link collapsed" type="button" data-toggle="collapse"
-                        data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Транквилизаторы
-                      </button>
-                    </h5>
-                  </div>
-                  <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                    data-parent="#accordionExample">
-                    <div class="card-body">
-                      <button class="accordion">Subgroup_Name_ru</button>
-                      <div class="panel">
-                        <p>Drug_Name_ru</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="headingOne">
-                    <h5 class="mb-0">
-                      <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-                        aria-expanded="true" aria-controls="collapseOne">
-                        СДВГ
-                      </button>
-                    </h5>
-                  </div>
-
-                  <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                    <div class="card-body">
-                      <button class="accordion">Subgroup_Name_ru</button>
-                      <div class="panel">
-                        <p>Drug_Name_ru</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark btn-sm" data-dismiss="modal">Закрыть</button>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
-
+      
         <br><br>
-       
 
   </section>
   <br><br>
@@ -278,64 +150,59 @@
       <br>
 
       <div class="form-group">
-        <label for="exampleInputId">ID*</label>
-        <input type="text" class="form-control" id="exampleInputId" aria-describedby="" placeholder="AAA000300" required>
-
+        <label for="InputId">ID*</label>
+        <input type="text" name="InputId" class="form-control" id="" aria-describedby="" placeholder="AAA000300" required>
       </div>
 
       <div class="form-group">
-        <label for="exampleInputSurname">Фамилия*</label>
-        <input type="text" class="form-control" id="exampleInputSurname" aria-describedby="" placeholder="Smith" required>
-
+        <label for="InputSurname">Фамилия*</label>
+        <input type="text" name="InputSurname" class="form-control" id="" aria-describedby="" placeholder="Иванов" required>
       </div>
 
       <div class="form-group">
-        <label for="exampleInputFirstName">Имя*</label>
-        <input type="text" class="form-control" id="exampleInputFirstName" aria-describedby="" placeholder="John" required>
-
+        <label for="InputFirstName">Имя*</label>
+        <input type="text" name="InputFirstName" class="form-control" id="" aria-describedby="" placeholder="Иван" required>
       </div>
 
       <div class="form-group">
-        <label for="exampleInputSecondName">Отчество*</label>
-        <input type="text" class="form-control" id="exampleInputSecondName" aria-describedby="" placeholder="Adam" required>
-
+        <label for="InputSecondName">Отчество*</label>
+        <input type="text" name="InputSecondName" class="form-control" id="" aria-describedby="" placeholder="Иванович" required>
       </div>
 
       <div class="form-group">
-        <label for="exampleInputBirth">Дата рождения*</label>
-        <input type="text" class="form-control" id="exampleInputBirth" aria-describedby="" placeholder="01/01/1980" required>
-
+        <label for="InputBirth">Дата рождения*</label>
+        <input type="text" name="InputBirth" class="form-control" id="" aria-describedby="" placeholder="01/01/1980" required>
       </div>
 
       <div class="form-group">
-        <label for="exampleInputHeight">Рост (см)*</label>
-        <input type="text" class="form-control" id="exampleInputHeight" aria-describedby="" placeholder="170" required>
-
+        <label for="InputHeight">Рост (см)*</label>
+        <input type="text" name="InputHeight" class="form-control" id="" aria-describedby="" placeholder="170" required>
       </div>
 
       <div class="form-group">
-        <label for="exampleInputWeight">Вес (кг)*</label>
-        <input type="text" class="form-control" id="exampleInputWeight" aria-describedby="" placeholder="80" required>
-
+        <label for="InputWeight">Вес (кг)*</label>
+        <input type="text" name="InputWeight" class="form-control" id="" aria-describedby="" placeholder="80" required>
       </div>
 
       <div class="form-group">
-        <label for="exampleInputSex">Пол (м/ж)*</label>
-        <input type="text" class="form-control" id="exampleInputSex" aria-describedby="" placeholder="m" required>
-
+        <label for="InputSex">Пол (м/ж)*</label>
+        <input type="text" name="InputSex" class="form-control" id="" aria-describedby="" placeholder="м" required>
       </div>
 
       <div class="form-group">
-        <label for="exampleInputRase">Раса*</label>
-        <input type="text" class="form-control" id="exampleInputRase" aria-describedby="" placeholder="Europid" required>
-
+        <label for="InputRase">Раса*</label>
+        <input type="text" name="InputRase" class="form-control" id="" aria-describedby="" placeholder="Европеоид" required>
       </div>
 
       <div class="form-group">
-        <label for="exampleInputNameDoctor">Имя доктора</label>
-        <input type="text" class="form-control" id="exampleInputNameDoctor" aria-describedby=""
-          placeholder="Gregory House, MD, PhD, Lab Director for RAS" required>
+        <label for="InputDate">Дата*</label>
+        <input type="text" name="InputDate" class="form-control" id="" aria-describedby="" placeholder="01/01/2020" required>
+      </div>
 
+      <div class="form-group">
+        <label for="InputNameDoctor">Имя доктора</label>
+        <input type="text" name="InputNameDoctor" class="form-control" id="" aria-describedby=""
+          placeholder="Доктор Хаус" required>
       </div>
     </div>
   </section>
@@ -348,11 +215,13 @@
       <!--<h2>/Шаг 4</h2>
       <h3>Generation of Report</h3>-->
       <br>
-
-
-     <a href="http://pgx2report.testinggo.ru/" class="btn btn-dark btn-lg btn-block" role="button"
+<!--
+     <a href="#" class="btn btn-dark btn-lg btn-block" role="button"
         style="background-color: #4B7872; color: #FFFFFF; border: solid 1px #4B7872;">Сформировать
         отчет</a>
+        --> 
+
+        <input type="submit" value="Сформировать отчет">
         <br>
       
     </div>
