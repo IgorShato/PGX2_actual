@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
   let data = new Array();
 
@@ -16,12 +17,11 @@ $(document).ready(function(){
       },
       success: function(response) {
         if(response.type == 'categories'){
-          $('.list-group').html(response.data);
+          $('.list-group__container').html(response.data);
         }else if (response.type == 'tableData'){
-          $('.tab-pane').find('table').find('tbody').html(response.data);
+          $('#nav-tabContent').html(response.data);
         } else if (response.type = 'popsData'){
           $('.modals').html(response.data);
-          console.log(response);
         }
         
         clearArray(data);
@@ -29,10 +29,37 @@ $(document).ready(function(){
     }); 
   }
 
+  let getAllPillsCategories = () => {
+    let pillsCategoriesId = new Array();
+
+    $.each($('.nav-link'), (indexInArray, valueOfElement) => {
+      pillsCategoriesId.push($(valueOfElement).data('category-id'));
+    });
+    
+    return pillsCategoriesId;
+  }
+
+  loadData('loadCategories', getAllPillsCategories());
+
   // Load data when application starts
-  loadData('loadCategories', new Array({idCategory : 1})); 
+  // loadData('loadCategories', new Array({idCategory : 1})); 
+  // setTimeout( () => { 
+  //   loadData('loadTable', new Array({geneName : $('.list-group-item.active').text()}));
+  // }, 50);
+
+  let getAllTransportCategories = () => {
+    let transportCategories = new Array();
+
+    $.each($('.list-group-item'), (indexInArray, valueOfElement) => {
+      transportCategories.push($(valueOfElement).text());
+    });
+
+    return transportCategories;
+  }
+
   setTimeout( () => { 
-    loadData('loadTable', new Array({geneName : $('.list-group-item.active').text()}));
+    loadData('loadTable', getAllTransportCategories()); 
+    displayTable($('.list-group.active').find('.list-group-item.active').text());
   }, 50);
   
   let getAllDrugGroups = () => {
@@ -50,25 +77,28 @@ $(document).ready(function(){
   $(document).on('click', '.nav-link', (e) => {
     e.preventDefault();
 
-    data.push({ 
-      idCategory : $(e.target).data('category-id') 
-    });
+    $('.list-group.active').toggleClass('active');
+    $('.list-group[data-parent-id="'+ $(e.target).data('category-id') +'"]').toggleClass('active');
 
-    loadData('loadCategories', data);
-    setTimeout( () => { 
-      loadData('loadTable', new Array({geneName : $('.list-group-item.active').text()}));
-    }, 50);
+    displayTable($('.list-group.active').find('.list-group-item.active').text());
   })
 
   $(document).on('click', '.list-group-item', (e) => {
     e.preventDefault();
 
-    data.push({
-      geneName : $(e.target).text()
-    });
-
-    loadData('loadTable', data);
+    displayTable($(e.target).text());
   });
+
+  let displayTable = (curCategory) => {
+    setTimeout( () => { 
+      if ($('.tab-pane[role="tablepanel"]').hasClass('active')){
+        $('.tab-pane[role="tablepanel"].active').removeClass('active');
+        $('.tab-pane[data-category-name="'+ curCategory +'"]').addClass('active');
+      }else{
+        $('.tab-pane[data-category-name="'+ curCategory +'"]').addClass('active');
+      }
+    }, 100);
+  }
 
   /**
    * Clear array
