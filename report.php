@@ -591,12 +591,12 @@ td {
 </style>
 ';
 
- //выводтаблицы
+ //вывод таблицы
 $pdf->WriteHTMLCell(290, 15, '3', '30', "$table_extended", 0, 0); 
 
 
 //вывод данных
- $pdf->Output('example.pdf', 'I');
+ $pdf->Output('PharmacoGenomeX2 - Report.pdf', 'I');
  
  
 
