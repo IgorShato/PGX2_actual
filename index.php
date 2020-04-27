@@ -18,7 +18,7 @@
   <!-- форма -->
   <!-- шаг 1 -->
 
-  <form action="report.php" id="php/" method="POST">
+  <form action="report.php" id="php/" method="POST" target="_blank">
 
   <section class="" id="">
     <br>
