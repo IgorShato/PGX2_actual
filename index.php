@@ -149,60 +149,61 @@
       <small id="" class="form-text text-muted">fields marked with * are required</small>
       <br>
 
-      <div class="form-group">
+       <div class="form-group">
         <label for="InputId">ID*</label>
-        <input type="text" name="InputId" class="form-control" id="" aria-describedby="" placeholder="AAA000300" required>
+        <input type="text" name="InputId" class="form-control" id="" aria-describedby="" placeholder="" value="ID">
       </div>
 
       <div class="form-group">
         <label for="InputSurname">Фамилия*</label>
-        <input type="text" name="InputSurname" class="form-control" id="" aria-describedby="" placeholder="Иванов" required>
+        <input type="text" name="InputSurname" class="form-control" id="" aria-describedby="" placeholder="" value="Иванов">
       </div>
 
       <div class="form-group">
         <label for="InputFirstName">Имя*</label>
-        <input type="text" name="InputFirstName" class="form-control" id="" aria-describedby="" placeholder="Иван" required>
+        <input type="text" name="InputFirstName" class="form-control" id="" aria-describedby="" placeholder="" value="Иван">
       </div>
 
       <div class="form-group">
         <label for="InputSecondName">Отчество*</label>
-        <input type="text" name="InputSecondName" class="form-control" id="" aria-describedby="" placeholder="Иванович" required>
+        <input type="text" name="InputSecondName" class="form-control" id="" aria-describedby="" placeholder="" value="Иванович">
       </div>
 
       <div class="form-group">
         <label for="InputBirth">Дата рождения*</label>
-        <input type="text" name="InputBirth" class="form-control" id="" aria-describedby="" placeholder="01/01/1980" required>
+        <input type="text" name="InputBirth" class="form-control" id="" aria-describedby="" placeholder="" value="01/01/1980">
       </div>
 
       <div class="form-group">
         <label for="InputHeight">Рост (см)*</label>
-        <input type="text" name="InputHeight" class="form-control" id="" aria-describedby="" placeholder="170" required>
+        <input type="text" name="InputHeight" class="form-control" id="" aria-describedby="" placeholder="" value="180">
       </div>
 
       <div class="form-group">
         <label for="InputWeight">Вес (кг)*</label>
-        <input type="text" name="InputWeight" class="form-control" id="" aria-describedby="" placeholder="80" required>
+        <input type="text" name="InputWeight" class="form-control" id="" aria-describedby="" placeholder="" value="80">
       </div>
 
       <div class="form-group">
         <label for="InputSex">Пол (м/ж)*</label>
-        <input type="text" name="InputSex" class="form-control" id="" aria-describedby="" placeholder="м" required>
+        <input type="text" name="InputSex" class="form-control" id="" aria-describedby="" placeholder="" value="м">
       </div>
 
       <div class="form-group">
         <label for="InputRase">Раса*</label>
-        <input type="text" name="InputRase" class="form-control" id="" aria-describedby="" placeholder="Европеоид" required>
+        <input type="text" name="InputRase" class="form-control" id="" aria-describedby="" placeholder="" value="Европеоид">
       </div>
 
       <div class="form-group">
         <label for="InputDate">Дата*</label>
-        <input type="text" name="InputDate" class="form-control" id="" aria-describedby="" placeholder="01/01/2020" required>
+        <input type="text" name="InputDate" class="form-control" id="" aria-describedby="" placeholder="" value="01/01/2020">
       </div>
 
       <div class="form-group">
         <label for="InputNameDoctor">Имя доктора</label>
         <input type="text" name="InputNameDoctor" class="form-control" id="" aria-describedby=""
-          placeholder="Доктор Хаус" required>
+          placeholder="" value="Застрожин Михаил Сергеевич, к.м.н.,
+руководитель лаборатории генетики МНПЦ наркологии ДЗМ">
       </div>
     </div>
   </section>
