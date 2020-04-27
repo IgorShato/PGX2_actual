@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="ru">
+html lang="ru">
 
 <head>
   <meta charset="utf-8">
@@ -196,7 +195,7 @@
 
       <div class="form-group">
         <label for="InputDate">Дата*</label>
-        <input type="date" name="InputDate" class="form-control" id="davaToday" aria-describedby="" placeholder="" value="01/01/2020">
+        <input type="date" name="InputDate" class="form-control" id="davaToday" aria-describedby="" placeholder="" value="">
       </div>
       
       <div class="form-group">
