@@ -149,7 +149,7 @@
       <small id="" class="form-text text-muted">fields marked with * are required</small>
       <br>
 
-       <div class="form-group">
+      <div class="form-group">
         <label for="InputId">ID*</label>
         <input type="text" name="InputId" class="form-control" id="" aria-describedby="" placeholder="" value="ID">
       </div>
@@ -196,9 +196,9 @@
 
       <div class="form-group">
         <label for="InputDate">Дата*</label>
-        <input type="text" name="InputDate" class="form-control" id="" aria-describedby="" placeholder="" value="01/01/2020">
+        <input type="date" name="InputDate" class="form-control" id="davaToday" aria-describedby="" placeholder="" value="01/01/2020">
       </div>
-
+      
       <div class="form-group">
         <label for="InputNameDoctor">Имя доктора</label>
         <input type="text" name="InputNameDoctor" class="form-control" id="" aria-describedby=""
@@ -239,6 +239,11 @@
       transition: max-height 0.2s ease-out;
     }
   </style>
+  
+  <!-- текущая дата в поле -->
+  <script>
+document.getElementById('davaToday').valueAsDate = new Date();
+</script>
 
   <script>
     document.addEventListener('click', (e) => {
