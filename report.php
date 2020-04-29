@@ -58,8 +58,8 @@ h1 {
 ';
 
 //блоки справа 
-$pdf->WriteHTMLCell(170, 48, '88', '0', "", 1,0); //блок 1
-$pdf->WriteHTMLCell(120, 33, '101', '1', "$title", 0,0, 'J', true); //блок 2
+$pdf->WriteHTMLCell(170, 48, '88', '0', "", 1,0); //блок 1 большой
+$pdf->WriteHTMLCell(120, 33, '101', '1', "$title", 0,0, 'J', true); //блок 2 малый
 
 //текст интро
 $text_intro = '<h4>Результаты генотипирования<br> и рекомендации<br> по персонализированной терапии</h4>
@@ -486,7 +486,6 @@ td {
 $pdf->WriteHTMLCell(290, 15, '3', '30', "$table_spec", 0, 0);
 
 
-
 //страница 4
   $pdf->AddPage('L', 'A4');
   
@@ -599,6 +598,3 @@ $pdf->WriteHTMLCell(290, 15, '3', '30', "$table_extended", 0, 0);
  $pdf->Output('PharmacoGenomeX2 - Report.pdf', 'I');
  
  
-
-
-  
