@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
   let data = new Array();
 
@@ -112,32 +111,108 @@ $(document).ready(function(){
    * Checkbox click events
    */
 
-   $(document).on('change', 'input[type="checkbox"][data-collapse="true"]', (e) => {
-    e.preventDefault();
-    
-    let inputscontainer = $(e.target).closest('.card').find('#' + $(e.target).data('collapse-target'));
+  $(document).on('change', 'input[type="checkbox"][data-collapse="true"]', (e) => {
+  e.preventDefault();
+  
+  let inputscontainer = $(e.target).closest('.card').find('#' + $(e.target).data('collapse-target'));
 
-    $.each($(inputscontainer).find('input[type="checkbox"]'), function (indexInArray, valueOfElement) { 
-      if ($(e.target).prop('checked')){
-        $(valueOfElement).prop('checked', true);
-      }else{
-        $(valueOfElement).prop('checked', false);
-      }
-    });
-   })
+  $.each($(inputscontainer).find('input[type="checkbox"]'), function (indexInArray, valueOfElement) { 
+    if ($(e.target).prop('checked')){
+      $(valueOfElement).prop('checked', true);
+    }else{
+      $(valueOfElement).prop('checked', false);
+    }
+  });
+  })
 
-   $(document).on('change', '.checkbox__modal', (e) => {
+  $(document).on('change', '.checkbox__modal', (e) => {
+  e.preventDefault();
+  
+  let modal = $('#' + $(e.target).attr('name'));
+  
+  $.each(modal.find('input[type="checkbox"]'), function (indexInArray, valueOfElement) { 
+    if ($(e.target).prop('checked')){
+      $(valueOfElement).prop('checked', true);
+    }else{
+      $(valueOfElement).prop('checked', false);
+    }
+  });
+  });
+
+  let columns = new Array();
+
+  $(document).on('change', '.checkbox2', function() {
+    let cells = $(this).closest('tr')[0].cells;
+    let gen = $(this).closest('.tab-pane').data('category-name');
+    let genotype = $(cells[3]).find('.select').val();
+
+    let obj = [gen, cells[0].innerText, cells[1].innerText, cells[2].innerText, genotype];
+
+    if(this.checked) {
+      columns.push(obj);
+    }else{
+      columns.forEach((element, index) => {
+        if (element.toString() == obj.toString()){
+          columns.splice(index, 1);
+          return false;
+        }
+      });
+    }
+  });
+ 
+  // $('#generate-pdf').on('click', (e) => {
+  //   e.preventDefault();
+
+  //   // console.log('generating...');
+
+  //   // let tables = document.getElementsByClassName('')
+   
+
+  //   // columns.push();
+
+  //   // let pdf = new jsPDF();
+
+  //   // pdf.autoTable({
+  //   //   head: [['Gen', 'Polymorphism', 'Allele', 'RS', 'Genotype']],
+  //   //   columnStyles: { 0: { halign: 'center', fillColor: [94, 172, 159] },  },
+  //   //   body: columns,
+  //   //   styles: {
+  //   //     halign: 'center',
+  //   //     valign: 'middle'
+  //   //   },
+  //   // });
+  //   // pdf.output('save', 'table.pdf');
+  // });
+
+  document.getElementById('generate-pdf1').addEventListener('click', (e) => {
     e.preventDefault();
-    
-    let modal = $('#' + $(e.target).attr('name'));
-    
-    $.each(modal.find('input[type="checkbox"]'), function (indexInArray, valueOfElement) { 
-      if ($(e.target).prop('checked')){
-        $(valueOfElement).prop('checked', true);
-      }else{
-        $(valueOfElement).prop('checked', false);
+
+    let formData = $('#pdf-form').serialize();
+
+    $.ajax({   
+      url: 'report.php',
+      type: 'POST',
+      xhrFields: {
+        responseType: 'blob'
+      },
+      data: {
+        formData: formData,
+        columns: columns
+      },
+      success: function(res){
+        console.log(res);
+        
+        let link = document.createElement('a');
+
+        link.href = window.URL.createObjectURL(res);
+        link.setAttribute('target', '_blank');
+        // link.download= 'table.pdf';
+        link.click();
+      },
+      error: function(jqxhr, status, exception) {
+        console.log('Exception:', exception);
       }
-    });
-   })
+    }); 
+  });
 
 }); 
