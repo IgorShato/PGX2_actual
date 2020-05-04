@@ -350,7 +350,6 @@ try{
 	$pdf->WriteHTMLCell(20, 20, '120', '205', $persent_down);
 
 
-
 	//страница 3
 		$pdf->AddPage('L', 'A4');
 		
