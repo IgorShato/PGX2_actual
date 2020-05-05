@@ -236,6 +236,7 @@ try{
 				<td>'.$column[2].'</td>
 				<td>'.$column[3].'</td>
 			  <td>'.$column[4].'</td>
+			  <td>N</td>
 			</tr>';
 		}
 	}
@@ -249,6 +250,7 @@ try{
 	<th>АЛЛЕЛЬ</th>
 	<th>RS</th>
 	<th>ГЕНОТИП</th>
+	<th>АКТИВНОСТЬ</th>
 	</tr>
 	'.$tableGenesRow.'
 	</table>
