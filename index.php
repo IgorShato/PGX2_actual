@@ -212,7 +212,7 @@
   $CurrentDate = date('j/m/Y');
   ?>
 
-  <br><br>
+  <br>
   <!-- шаг 4 -сформировать отчет -->
 
   <section class="" id="">
@@ -220,13 +220,9 @@
       <!--<h2>/Шаг 4</h2>
       <h3>Generation of Report</h3>-->
       <br>
-<!--
-     <a href="#" class="btn btn-dark btn-lg btn-block" role="button"
-        style="background-color: #4B7872; color: #FFFFFF; border: solid 1px #4B7872;">Сформировать
-        отчет</a>
-        --> 
 
-        <input type="submit" value="Сформировать отчет" id="generate-pdf1">
+        <!--<input type="submit" value="Сформировать отчет" id="generate-pdf1">-->
+      <button type="submit" class="btn btn-success" id="generate-pdf1" style="background-color: #4B7872; border: solid 1px #4B7872;">Сформировать отчет</button>
         <br>
       
     </div>
