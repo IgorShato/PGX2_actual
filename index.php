@@ -28,7 +28,6 @@
       <p>Do not change the genotype, if you don’t know it ("wild" types is default).</p><br>
 
       <!-- выбираем направление  -->
-
       <div class="row">
         <div class="col-3">
           <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -63,10 +62,7 @@
           </div>
         </div>
       </div><br>
-      <!-- 
-      <button type="button" class="btn btn-outline-secondary" href="#">&larr; Назад</button>
-      <button type="button" class="btn btn-outline-success" href="#">Дальше &rarr;</button>
-      -->
+     
     </div>
     </div>
 
@@ -77,7 +73,6 @@
   </section>
 
   <!-- Шаг 2 -->
-
   <section class="" id="">
     <div class="container">
       <h2>/Шаг 2</h2>
@@ -92,7 +87,7 @@
         }
       </style>
       
-      <!-- кнопка -->
+      <!-- кнопки -->
       <input class="checkbox__modal" type="checkbox" name="psychiatry">
       <button type="button" class="btn someclass" data-toggle="modal" data-target="#psychiatry" data-specialization-name="psychiatry"> PSYCHIATRY
       </button>
@@ -140,8 +135,8 @@
 
   </section>
   <br><br>
+    
   <!-- шаг 3 -->
-
   <section class="" id="user-info">
     <div class="container">
       <h2>/Шаг 3</h2>
@@ -208,13 +203,14 @@
     </div>
   </section>
   
-  <?php 
+  <!--
+    <?php 
   $CurrentDate = date('j/m/Y');
   ?>
-
+-->
   <br>
+    
   <!-- шаг 4 -сформировать отчет -->
-
   <section class="" id="">
     <div class="container">
       <!--<h2>/Шаг 4</h2>
@@ -228,6 +224,7 @@
     </div>
   </section>
   </form>
+  <!--  конец формы -->
 
   <!--  -->
   <style>
@@ -259,8 +256,6 @@ document.getElementById('davaToday').valueAsDate = new Date();
     });
   </script>
 
-  <!--  конец формы -->
-
   <!-- JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
@@ -276,5 +271,4 @@ document.getElementById('davaToday').valueAsDate = new Date();
   <script src="js/app.js" async></script>
 
 </body>
-
 </html>
