@@ -7,7 +7,6 @@ try{
 	parse_str($_POST['formData'], $values);
 
 	// данные пациента
-
 	$InputId = $values['InputId'];
 	$InputSurname = $values['InputSurname'];
 	$InputFirstName = $values['InputFirstName'];
@@ -31,7 +30,7 @@ try{
 	//создаем объект 
 	$pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8');
 		
-		//шрифты
+	//шрифты
 	//$pdf->SetFont('Helvetica', '', 19);
 	$pdf->SetFont('dejavusans', '', 14, '', true); // безопасный
 		
@@ -39,9 +38,8 @@ try{
 	$pdf->setPrintHeader(false);
 	$pdf->setPrintFooter(false);
 
-	//обрыв страницу
+	//обрыв страницы
 	$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
-
 
 	//страница 1 
 	$pdf->AddPage('P', 'A4');
@@ -155,12 +153,13 @@ try{
 
 	//страница 2
 		$pdf->AddPage('P', 'A4');
+
 		
 	//вертикальная позиция для столбца
 	$y = $pdf->getY();
 
 	//левая колонка
-	//цыет фона
+	//цвет фона
 	$pdf->SetFillColor(75, 120, 114);
 
 	//вывод колонки
@@ -272,8 +271,8 @@ try{
 	';
 
 	//вывод таблицы
-	$pdf->WriteHTMLCell(165, 70, '25', '64', "$table_genes", 0,0);
-
+	$pdf->WriteHTMLCell(165, '', '25', '64', "$table_genes", 0,0);
+	
 	//текст 
 	$text_page2 = '
 	<p>Имеются данные, свидетельствующие о наличии генетически обусловленных отклонений в скорости метаболизма, что может увеличить риск развития нежелательных реакций на назначаемые лекарственные препараты и, в связи с этим, недостаточной эффективности терапии.</p>
@@ -288,7 +287,7 @@ try{
 	';
 
 	// вывод текста
-	$pdf->WriteHTMLCell(160, 90, '30', '120', "$text_page2", 0,0);
+	$pdf->WriteHTMLCell(160, 90, '30', '150', "$text_page2", 0,0);
 
 	// треугольники
 	$style = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'phase' => 0, 'color' => array(0, 0, 0));
@@ -303,28 +302,28 @@ try{
 	$style7 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(168, 24, 21));
 
 
-	$pdf->Line(40, 180, 40, 220, $style2);
-	$pdf->Line(42, 201, 196, 201, $style3);
+	$pdf->Line(40, 219, 40, 270, $style2); //вертикальная линия
+	$pdf->Line(42, 244, 196, 244, $style3); //горизонтальная линия
 
 	//текст
-	$pdf->WriteHTMLCell(15, 10, '27', '179', "<small>200%</small>");
-	$pdf->WriteHTMLCell(15, 10, '27', '189', "<small>150%</small>");
-	$pdf->WriteHTMLCell(15, 10, '27', '199', "<small>100%</small>");
-	$pdf->WriteHTMLCell(15, 10, '29', '209', "<small>50%</small>");
-	$pdf->WriteHTMLCell(15, 10, '30', '219', "<small>0%</small>");
+	$pdf->WriteHTMLCell(15, 10, '27', '218', "<small>200%</small>");
+	$pdf->WriteHTMLCell(15, 10, '27', '230', "<small>150%</small>");
+	$pdf->WriteHTMLCell(15, 10, '27', '242', "<small>100%</small>");
+	$pdf->WriteHTMLCell(15, 10, '29', '254', "<small>50%</small>");
+	$pdf->WriteHTMLCell(15, 10, '30', '266', "<small>0%</small>");
 
 	//текст
-	$pdf->WriteHTMLCell(30, 20, '28', '227', "<small>Активность</small>");
-	$pdf->WriteHTMLCell(30, 20, '50', '227', "<small>CYP2C19*2</small>");
-	$pdf->WriteHTMLCell(30, 20, '72', '227', "<small>CYP2C19*3</small>");
-	$pdf->WriteHTMLCell(30, 20, '94', '227', "<small>CYP2C19*17</small>");
-	$pdf->WriteHTMLCell(30, 20, '118', '227', "<small>CYP2D6*4</small>");
-	$pdf->WriteHTMLCell(30, 20, '138', '227', "<small>CYP3A4*22</small>");
-	$pdf->WriteHTMLCell(30, 20, '160', '227', "<small>CYP3A5*3</small>");
-	$pdf->WriteHTMLCell(30, 20, '182', '227', "<small>ABCB1*6</small>");
+	$pdf->WriteHTMLCell(30, 20, '28', '277', "<small>Активность</small>");
+	$pdf->WriteHTMLCell(30, 20, '50', '277', "<small>CYP2C19*2</small>");
+	$pdf->WriteHTMLCell(30, 20, '72', '277', "<small>CYP2C19*3</small>");
+	$pdf->WriteHTMLCell(30, 20, '94', '277', "<small>CYP2C19*17</small>");
+	$pdf->WriteHTMLCell(30, 20, '118', '277', "<small>CYP2D6*4</small>");
+	$pdf->WriteHTMLCell(30, 20, '138', '277', "<small>CYP3A4*22</small>");
+	$pdf->WriteHTMLCell(30, 20, '160', '277', "<small>CYP3A5*3</small>");
+	$pdf->WriteHTMLCell(30, 20, '182', '277', "<small>ABCB1*6</small>");
 
-	// треугольники вверх 
-	$pdf->RegularPolygon(105, 195, 12, 3, 60, '', 'DF', $style6, array(50, 59, 159));
+	// треугольник вверх 
+	$pdf->RegularPolygon(104, 238, 12, 3, 60, '', 'DF', $style6, array(50, 59, 159));
 	// текст треугольника
 	$persent_up = '
 	<p>+95%</p>
@@ -335,10 +334,10 @@ try{
 	}
 	</style> 
 	';
-	$pdf->WriteHTMLCell(20, 20, '99', '193', $persent_up);
+	$pdf->WriteHTMLCell(20, 20, '98', '235', $persent_up);
 
 	// треугольник низ 
-	$pdf->RegularPolygon(125, 207, 12, 3, 0, '', 'DF', $style6, array(168, 24, 48));
+	$pdf->RegularPolygon(125, 250, 12, 3, 0, '', 'DF', $style6, array(168, 24, 48));
 	// текст треугольника 
 	$persent_down = '
 	<p>-95%</p>
@@ -349,7 +348,8 @@ try{
 	}
 	</style>
 	';
-	$pdf->WriteHTMLCell(20, 20, '120', '205', $persent_down);
+	$pdf->WriteHTMLCell(20, 20, '120', '249', $persent_down);
+
 
 
 	//страница 3
@@ -577,6 +577,3 @@ try{
 }
  
  
-
-
-  
