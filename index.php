@@ -135,8 +135,8 @@
 
   </section>
   <br><br>
-    
   <!-- шаг 3 -->
+
   <section class="" id="user-info">
     <div class="container">
       <h2>/Шаг 3</h2>
@@ -203,28 +203,17 @@
     </div>
   </section>
   
-  <!--
-    <?php 
-  $CurrentDate = date('j/m/Y');
-  ?>
--->
-  <br>
-    
   <!-- шаг 4 -сформировать отчет -->
   <section class="" id="">
     <div class="container">
-      <!--<h2>/Шаг 4</h2>
-      <h3>Generation of Report</h3>-->
-      <br>
-
-        <!--<input type="submit" value="Сформировать отчет" id="generate-pdf1">-->
-      <button type="submit" class="btn btn-success" id="generate-pdf1" style="background-color: #4B7872; border: solid 1px #4B7872;">Сформировать отчет</button>
-        <br>
       
+      <br>
+        <button type="submit" class="btn btn-success" id="generate-pdf1" style="background-color: #4B7872">Сформировать отчет</button>
+        <br><br><br>
     </div>
   </section>
   </form>
-  <!--  конец формы -->
+<!--  конец формы -->
 
   <!--  -->
   <style>
@@ -244,7 +233,9 @@ document.getElementById('davaToday').valueAsDate = new Date();
 
   <script>
     document.addEventListener('click', (e) => {
+      // 
       if(e.target && e.target.className == 'accordion'){
+        e.preventDefault();
         let panel = e.target.nextElementSibling;
 
         if (panel.style.maxHeight) {
