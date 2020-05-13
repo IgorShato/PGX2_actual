@@ -238,9 +238,15 @@ try{
 				<td>'.$column[1].'</td>
 				<td>'.$column[2].'</td>
 				<td>'.$column[3].'</td>
-			  <td>'.$column[4].'</td>
-			  <td>N</td>
-			</tr>';
+				<td>'.$column[4].'</td>';
+				if($column[5]==1){
+					$tableGenesRow .= '<td>Статус 1</td>';
+				}elseif($column[5]==2){
+					$tableGenesRow .= '<td>Статус 2</td>';
+				}else{
+					$tableGenesRow .= '<td>Статус 3</td>';
+				}  	
+			$tableGenesRow .= '</tr>';
 		}
 	}
 
