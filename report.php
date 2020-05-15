@@ -70,8 +70,6 @@ try{
 	//цвет для левой колонки
 	$pdf->SetFillColor(75, 120, 114);
 
-	//$left_column = '';
-
 	//левая колонка
 	$pdf->writeHTMLCell(40, '295', '1', '1', $left_column, 0, 0, 1, true, 'J', true);
 
