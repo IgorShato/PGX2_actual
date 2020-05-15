@@ -189,7 +189,7 @@ try{
 	//вертикальный текст - начало
 	$pdf->StartTransform();
 
-	//поворот текста вертикально
+	//поворот текста
 	$pdf->Rotate(90, 58, 145);
 	$pdf->SetDrawColor(255);
 	$pdf->SetTextColor(255);
@@ -377,7 +377,7 @@ try{
 	$pdf->WriteHTMLCell(160, 90, '30', '225', "$text_page2", 0,0);
 
 	
- /**
+         /**
 	 * страница 3
 	 */
 	   
@@ -461,7 +461,7 @@ try{
 	$pdf->WriteHTMLCell(290, 15, '3', '30', "$table_extended", 0, 0);
 
 	 
-    /**
+         /**
 	 * страница 4
 	 */
 	   
