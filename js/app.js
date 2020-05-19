@@ -1,7 +1,8 @@
+
 $(document).ready(function(){
 
   setTimeout( () => {  
-    console.log('here');
+
     let data = new Array();
     /**
      * Loading data
@@ -42,11 +43,11 @@ $(document).ready(function(){
 
     loadData('loadCategories', getAllPillsCategories());
 
-    // Load data when application starts
-    // loadData('loadCategories', new Array({idCategory : 1})); 
-    // setTimeout( () => { 
-    //   loadData('loadTable', new Array({geneName : $('.list-group-item.active').text()}));
-    // }, 50);
+    //Load data when application starts
+    loadData('loadCategories', new Array({idCategory : 1})); 
+    setTimeout( () => { 
+      loadData('loadTable', new Array({geneName : $('.list-group-item.active').text()}));
+    }, 50);
 
     let getAllTransportCategories =  function() {
       let transportCategories = new Array();
@@ -148,15 +149,16 @@ $(document).ready(function(){
       let gen = $(this).closest('.tab-pane').data('category-name');
       let genotype = $(cells[3]).find('.select').val();
       let activityIndex = $(cells[3]).find('.select').find(":selected").index();
-      let acrivityValue = "N";
+      let activityValue = 0;
+      let kPol = $(cells[3]).find('.select').attr('k-pol');
 
       if (activityIndex == 1){
-        acrivityValue = "&darr;"; //25%
+        activityValue = 25 * kPol;
       }else if (activityIndex == 2){
-        acrivityValue = "&darr;&darr;";//50%
+        activityValue = 50 * kPol;
       }
 
-      let obj = [gen, cells[0].innerText, cells[1].innerText, cells[2].innerText, genotype, acrivityValue];
+      let obj = [gen, cells[0].innerText, cells[1].innerText, cells[2].innerText, genotype, activityValue];
 
       if(this.checked) {
         columns.push(obj);
@@ -168,8 +170,6 @@ $(document).ready(function(){
           }
         });
       }
-
-      console.log(columns);
     });
 
     let drugs = new Array();
