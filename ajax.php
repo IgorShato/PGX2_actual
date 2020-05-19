@@ -60,7 +60,7 @@
               <td>'.$value['Allele_variant'].'</td>
               <td>'.$value['rs'].'</td>
               <td>
-              <select size="1" name="VKORC1_99" class="select">
+              <select size="1" name="VKORC1_99" class="select" k-pol="'.$value['k_pol'].'">
               <option value="'.$value['Genotype_1'].'">
               '.$value['Genotype_1'].'
               </option>
