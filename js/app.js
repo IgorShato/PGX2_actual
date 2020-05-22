@@ -115,17 +115,31 @@ $(document).ready(function(){
      */
 
     $(document).on('change', 'input[type="checkbox"][data-collapse="true"]',  function(e) {
-    e.preventDefault();
-    
-    let inputscontainer = $(e.target).closest('.card').find('#' + $(e.target).data('collapse-target'));
+      e.preventDefault();
 
-    $.each($(inputscontainer).find('input[type="checkbox"]'), function (indexInArray, valueOfElement) { 
-      if ($(e.target).prop('checked')){
-        $(valueOfElement).prop('checked', true);
-      }else{
-        $(valueOfElement).prop('checked', false);
-      }
-    });
+      let inputsContainer = $(e.target).closest('.card').find('#' + $(e.target).data('collapse-target'));
+
+      $.each($(inputsContainer).find('input[type="checkbox"]'), function (indexInArray, valueOfElement) { 
+        if ($(e.target).prop('checked')){
+          $(valueOfElement).prop('checked', true);
+        }else{
+          $(valueOfElement).prop('checked', false);
+        }
+      });
+    })
+
+    $(document).on('change', 'input[type="checkbox"][data-collapse="true"].panel-collapse',  function(e) {
+      e.preventDefault();
+
+      let panelContainer = $(e.target).closest('.card-body').find('[panel-id='+$(e.target).data('collapse-target-panel')+']');
+
+      $.each($(panelContainer).find('input[type="checkbox"]'), function (indexInArray, valueOfElement) { 
+        if ($(e.target).prop('checked')){
+          $(valueOfElement).prop('checked', true);
+        }else{
+          $(valueOfElement).prop('checked', false);
+        }
+      });
     })
 
     $(document).on('change', '.checkbox__modal',  function(e) {
@@ -162,15 +176,50 @@ $(document).ready(function(){
 
       if(this.checked) {
         columns.push(obj);
+        kPolSum($('.list-group.active').find('.list-group-item.active').text(), kPol);
       }else{
         columns.forEach( function(element, index){
           if (element.toString() == obj.toString()){
             columns.splice(index, 1);
+
+            let genArrIndex = findGen($('.list-group.active').find('.list-group-item.active').text());
+            if (genArrIndex != undefined){
+              kPolSumArr[genArrIndex].kPolSum -= 75 * kPol;
+              if (kPolSumArr[genArrIndex].kPolSum == 0){
+                kPolSumArr.splice(genArrIndex, 1);
+              }
+            }
             return false;
           }
         });
       }
+      console.log(kPolSumArr);
     });
+
+    let kPolSumArr = new Array();
+
+    let kPolSum = (gen, kPol) => {
+      let genArrIndex = findGen(gen);
+
+      if (genArrIndex != undefined){
+        kPolSumArr[genArrIndex].kPolSum += 75 * kPol
+      }else{
+        kPolSumArr.push({
+          gen: gen,
+          kPolSum: 75 * kPol
+        })
+      }
+    }
+
+    let findGen = (name) => {
+      for (let i = 0; i < kPolSumArr.length; i++){
+        if (kPolSumArr[i].gen == name){
+          return i;
+          break;
+        }
+      }
+      return undefined;
+    }
 
     let drugs = new Array();
 
@@ -191,6 +240,32 @@ $(document).ready(function(){
       }
     });
 
+
+    // document.getElementById('generate-pdf1').addEventListener('click',  function(e) {
+    //   e.preventDefault();
+
+    //   let formData = $('#pdf-form').serialize();
+
+    //   $.ajax({   
+    //     url: 'report.php',
+    //     type: 'POST',
+    //     dataType: 'json',
+    //     data: {
+    //       formData: formData,
+    //       columns: columns,
+    //       drugs: drugs,
+    //       kPolSum: kPolSumArr
+    //     },
+    //     success: function(res){
+    //       console.log(res);
+          
+    //     },
+    //     error: function(jqxhr, status, exception) {
+    //       console.log('Exception:', exception);
+    //     }
+    //   }); 
+    // });
+
     document.getElementById('generate-pdf1').addEventListener('click',  function(e) {
       e.preventDefault();
 
@@ -205,7 +280,8 @@ $(document).ready(function(){
         data: {
           formData: formData,
           columns: columns,
-          drugs: drugs
+          drugs: drugs,
+          kPolSum: kPolSumArr
         },
         success: function(res){
           console.log(res);
