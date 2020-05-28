@@ -176,7 +176,7 @@ $(document).ready(function(){
 
       if(this.checked) {
         columns.push(obj);
-        kPolSum($('.list-group.active').find('.list-group-item.active').text(), kPol);
+        kPolSum($('.list-group.active').find('.list-group-item.active').text(), activityValue);
       }else{
         columns.forEach( function(element, index){
           if (element.toString() == obj.toString()){
@@ -184,7 +184,7 @@ $(document).ready(function(){
 
             let genArrIndex = findGen($('.list-group.active').find('.list-group-item.active').text());
             if (genArrIndex != undefined){
-              kPolSumArr[genArrIndex].kPolSum -= 75 * kPol;
+              kPolSumArr[genArrIndex].kPolSum -= activityValue;
               if (kPolSumArr[genArrIndex].kPolSum == 0){
                 kPolSumArr.splice(genArrIndex, 1);
               }
@@ -198,15 +198,15 @@ $(document).ready(function(){
 
     let kPolSumArr = new Array();
 
-    let kPolSum = (gen, kPol) => {
+    let kPolSum = (gen, activityValue) => {
       let genArrIndex = findGen(gen);
 
       if (genArrIndex != undefined){
-        kPolSumArr[genArrIndex].kPolSum += 75 * kPol
+        kPolSumArr[genArrIndex].kPolSum += activityValue
       }else{
         kPolSumArr.push({
           gen: gen,
-          kPolSum: 75 * kPol
+          kPolSum: activityValue
         })
       }
     }
