@@ -132,19 +132,22 @@
 ';
 
         foreach ($rezult_drugSubgroups as $key2 => $value2){
-          $statement = $pdo->prepare("SELECT ID, Drug_Name_ru FROM spec WHERE Subgroup_Name_ru = :subgroup_name");
+          $statement = $pdo->prepare("SELECT ID, Drug_Name_ru, Primary_Enzyme_1, Primary_Enzyme_2, Secondary_Enzyme_1, Secondary_Enzyme_2, Secondary_Enzyme_3, Pharmacodynamic_Gene FROM spec WHERE Subgroup_Name_ru = :subgroup_name");
           $statement->bindValue(':subgroup_name', $value2['Subgroup_Name_ru']);
           $statement->execute();
           $rezult_drugName = $statement->fetchAll(PDO::FETCH_ASSOC);
 
           $output .= '
-                <input type="checkbox" name="" id="checkbox">
+                <input type="checkbox" name="" id="checkbox" class="panel-collapse" data-collapse="true" data-collapse-target-panel="'.$key2.'">
                 <button class="accordion">'.$value2['Subgroup_Name_ru'].'</button>
-                <div class="panel">';
+                <div class="panel" panel-id="'.$key2.'">';
 
           foreach ($rezult_drugName as $key3 => $value3){
+            $arr = array($value3['Primary_Enzyme_1'], $value3['Primary_Enzyme_2'], $value3['Secondary_Enzyme_1'], $value3['Secondary_Enzyme_2'], $value3['Secondary_Enzyme_3']);
+            $arr = array_filter($arr);
+
             $output .= '
-              <input type="checkbox" id="'.$value3['ID'].'" name="'.$value3['ID'].'" class="drug-checkbox" /><label for="'.$value3['ID'].'">'.$value3['Drug_Name_ru'].'</label>
+              <input type="checkbox" id="'.$value3['ID'].'" name="'.$value3['ID'].'" class="drug-checkbox" /><label for="'.$value3['ID'].'" data-enzyme="'.implode(',', $arr).'">'.$value3['Drug_Name_ru'].'</label>
             ';
           }
           $output .= '</div>';
