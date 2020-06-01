@@ -274,7 +274,7 @@ document.getElementById('davaToday').valueAsDate = new Date();
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.2/jspdf.plugin.autotable.min.js"></script> -->
   <!--<script src="js/form.js"></script>-->
   
-  <script type="module" src="js/app.js"></script>
+  <script type="module" src="js/app.js" async></script>
 
 </body>
 
