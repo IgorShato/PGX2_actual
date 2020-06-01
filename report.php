@@ -484,8 +484,8 @@ try{
 		foreach($secondStepColumns as $key => $column){
 			$tableDrugsRow .= 
 			'<tr>
-				<td style="color: #4B7872">'.$column[0].'</td>
-				<td></td>
+				<td style="color: #4B7872">'.$column['name'].'</td>
+				<td>'.$column['geneSum'].'</td>
 				<td></td>
 				<td></td>
 				<td></td>
@@ -550,86 +550,86 @@ try{
 
 
 
-		//страница 5
-		$pdf->AddPage('L', 'A4');
+	// 	//страница 5
+	// 	$pdf->AddPage('L', 'A4');
 		
-		//таблица
-	//цвет фона
-	$pdf->SetFillColor(75, 120, 114);
+	// 	//таблица
+	// //цвет фона
+	// $pdf->SetFillColor(75, 120, 114);
 
-	// цвет текста
-	//$pdf->SetTextColor(255, 255, 255);
+	// // цвет текста
+	// //$pdf->SetTextColor(255, 255, 255);
 
-	$tableKPolSumRow = '';
-	if (isset($_POST['kPolSum'])){
+	// $tableKPolSumRow = '';
+	// if (isset($_POST['kPolSum'])){
 		
 
-		foreach($kPolSumColumns as $key => $column){
-			$tableKPolSumRow .= 
-			'<tr>
-				<td>'.$column['gen'].'</td>
-				<td>'.$column['kPolSum'].'</td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>';
-		}
-	}
+	// 	foreach($kPolSumColumns as $key => $column){
+	// 		$tableKPolSumRow .= 
+	// 		'<tr>
+	// 			<td>'.$column['gen'].'</td>
+	// 			<td>'.$column['kPolSum'].'</td>
+	// 			<td></td>
+	// 			<td></td>
+	// 			<td></td>
+	// 			<td></td>
+	// 			<td></td>
+	// 		</tr>';
+	// 	}
+	// }
 
-	// хедер таблицы
-	$header_table_newName = '
-	<br><h4>РАСШИРЕННЫЕ РЕКОМЕНДАЦИИ</h4>
-	<style>
-	h4 {
-		font-size: 14px;
-		text-align: center;
-		color: #FFFFFF;
-		font-weight: regular;
-	}
-	</style>
-	';
+	// // хедер таблицы
+	// $header_table_newName = '
+	// <br><h4>РАСШИРЕННЫЕ РЕКОМЕНДАЦИИ</h4>
+	// <style>
+	// h4 {
+	// 	font-size: 14px;
+	// 	text-align: center;
+	// 	color: #FFFFFF;
+	// 	font-weight: regular;
+	// }
+	// </style>
+	// ';
 
-	$pdf->writeHTMLCell(288, '24', '4', '4', $header_table_newName, 0, 0, 1, true, 'J', true);
+	// $pdf->writeHTMLCell(288, '24', '4', '4', $header_table_newName, 0, 0, 1, true, 'J', true);
 
 
-	//таблица
-	$table_newName = '
-	<table>
-		<tr>
-		<th style="color: #FFFFFF; background-color: #5DACA1;">СИОЗС</th>
-		<th style="color: #FFFFFF; background-color: #5DACA1;">РЕКОМЕНДАЦИИ</th>
-		<th style="color: #FFFFFF; background-color: #5DACA1;">ФАРМАКО<br>ДИНАМИКА</th>
-		<th style="color: #FFFFFF; background-color: #5DACA1;">ДЕЙСТВИЕ</th>
-		<th style="color: #FFFFFF; background-color: #5DACA1;">ФАРМАКО<br>КИНЕТИКА</th>
-		<th style="color: #FFFFFF; background-color: #5DACA1;">ДЕЙСТВИЕ</th>
-		<th style="color: #FFFFFF; background-color: #5DACA1;">ПОЛИПРАГМАЗИЯ<br>И ДРУГИЕ ФАКТОРЫ</th>
-		</tr>
-		'.$tableKPolSumRow.'
-	</table>
+	// //таблица
+	// $table_newName = '
+	// <table>
+	// 	<tr>
+	// 	<th style="color: #FFFFFF; background-color: #5DACA1;">СИОЗС</th>
+	// 	<th style="color: #FFFFFF; background-color: #5DACA1;">РЕКОМЕНДАЦИИ</th>
+	// 	<th style="color: #FFFFFF; background-color: #5DACA1;">ФАРМАКО<br>ДИНАМИКА</th>
+	// 	<th style="color: #FFFFFF; background-color: #5DACA1;">ДЕЙСТВИЕ</th>
+	// 	<th style="color: #FFFFFF; background-color: #5DACA1;">ФАРМАКО<br>КИНЕТИКА</th>
+	// 	<th style="color: #FFFFFF; background-color: #5DACA1;">ДЕЙСТВИЕ</th>
+	// 	<th style="color: #FFFFFF; background-color: #5DACA1;">ПОЛИПРАГМАЗИЯ<br>И ДРУГИЕ ФАКТОРЫ</th>
+	// 	</tr>
+	// 	'.$tableKPolSumRow.'
+	// </table>
 
-	<style>
-	th {
-		font-size: 11.5px;
-		color: #FFFFFF;
-		background-color: #4B7872;
-		text-align: center;
-		border: solid 1px #FFFFFF;
-	}
-	td {
-		font-size: 10px;
-		text-align: center;
-		font-weight: bold;
-		color: #000000;
-		border: solid 1px #A5C5C1;
-		height: 40px;
-	}
-	</style>
-	';
+	// <style>
+	// th {
+	// 	font-size: 11.5px;
+	// 	color: #FFFFFF;
+	// 	background-color: #4B7872;
+	// 	text-align: center;
+	// 	border: solid 1px #FFFFFF;
+	// }
+	// td {
+	// 	font-size: 10px;
+	// 	text-align: center;
+	// 	font-weight: bold;
+	// 	color: #000000;
+	// 	border: solid 1px #A5C5C1;
+	// 	height: 40px;
+	// }
+	// </style>
+	// ';
 
-	//вывод таблицы
-	$pdf->WriteHTMLCell(290, 15, '3', '30', "$table_newName", 0, 0); 
+	// //вывод таблицы
+	// $pdf->WriteHTMLCell(290, 15, '3', '30', "$table_newName", 0, 0); 
 	$pdf->Output('PharmacoGenomeX2 - Report.pdf', 'I');
 
 	//вывод данных
@@ -638,5 +638,4 @@ try{
 }catch (PDOExeption $e){
 	return $e->getMessage;
 }
- 
  
