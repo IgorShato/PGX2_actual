@@ -28,7 +28,6 @@
       <p>Do not change the genotype, if you don’t know it ("wild" types is default).</p><br>
 
       <!-- выбираем направление  -->
-
       <div class="row">
         <div class="col-3">
           <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -63,10 +62,7 @@
           </div>
         </div>
       </div><br>
-      <!-- 
-      <button type="button" class="btn btn-outline-secondary" href="#">&larr; Назад</button>
-      <button type="button" class="btn btn-outline-success" href="#">Дальше &rarr;</button>
-      -->
+     
     </div>
     </div>
 
@@ -77,7 +73,6 @@
   </section>
 
   <!-- Шаг 2 -->
-
   <section class="" id="">
     <div class="container">
       <h2>/Шаг 2</h2>
