@@ -101,9 +101,17 @@ $(document).ready(function(){
 
     $.each($(inputsContainer).find('input[type="checkbox"]'), function (indexInArray, valueOfElement) { 
       if ($(e.target).prop('checked')){
-        $(valueOfElement).prop('checked', true);
+        if ($(valueOfElement).hasClass('drug-checkbox')){
+          $(valueOfElement).prop('checked', true).change();
+        }else{
+          $(valueOfElement).prop('checked', true);
+        }
       }else{
-        $(valueOfElement).prop('checked', false);
+        if ($(valueOfElement).hasClass('drug-checkbox')){
+          $(valueOfElement).prop('checked', false).change();
+        }else{
+          $(valueOfElement).prop('checked', false);
+        }
       }
     });
   })
@@ -115,25 +123,33 @@ $(document).ready(function(){
 
     $.each($(panelContainer).find('input[type="checkbox"]'), function (indexInArray, valueOfElement) { 
       if ($(e.target).prop('checked')){
-        $(valueOfElement).prop('checked', true);
+        if ($(valueOfElement).hasClass('drug-checkbox')){
+          $(valueOfElement).prop('checked', true).change();
+        }else{
+          $(valueOfElement).prop('checked', true);
+        }
       }else{
-        $(valueOfElement).prop('checked', false);
+        if ($(valueOfElement).hasClass('drug-checkbox')){
+          $(valueOfElement).prop('checked', false).change();
+        }else{
+          $(valueOfElement).prop('checked', false);
+        }
       }
     });
   })
 
   $(document).on('change', '.checkbox__modal',  function(e) {
-  e.preventDefault();
-  
-  let modal = $('#' + $(e.target).attr('name'));
-  
-  $.each(modal.find('input[type="checkbox"]'), function (indexInArray, valueOfElement) { 
-    if ($(e.target).prop('checked')){
-      $(valueOfElement).prop('checked', true).change();
-    }else{
-      $(valueOfElement).prop('checked', false).change();
-    }
-  });
+    e.preventDefault();
+    
+    let modal = $('#' + $(e.target).attr('name'));
+    
+    $.each(modal.find('input[type="checkbox"]'), function (indexInArray, valueOfElement) { 
+      if ($(e.target).prop('checked')){
+        $(valueOfElement).prop('checked', true).change();
+      }else{
+        $(valueOfElement).prop('checked', false).change();
+      }
+    });
   });
 
   let columns = new Array();
@@ -152,10 +168,10 @@ $(document).ready(function(){
       activityValue = 50 * kPol;
     }
 
-    console.log(activityValue);
-    console.log('index %d', activityIndex);
+    // console.log(activityValue);
+    // console.log('index %d', activityIndex);
 
-    let obj = [gen, cells[0].innerText, cells[1].innerText, cells[2].innerText, genotype, activityValue];
+    let obj = [gen, cells[0].innerText, cells[1].innerText, cells[2].innerText, genotype, formKPolSum(activityValue)];
 
     if(this.checked) {
       columns.push(obj);
@@ -176,7 +192,7 @@ $(document).ready(function(){
         }
       });
     }
-    console.log(kPolSumArr);
+    // console.log(columns);
   });
 
   let kPolSumArr = new Array();
@@ -191,6 +207,28 @@ $(document).ready(function(){
         gen: gen,
         kPolSum: activityValue
       })
+    }
+  }
+
+  let formKPolSum = (activityValue) => {
+    switch (activityValue) {
+      case 0:
+        return 'N';
+        break;
+      case 25:
+        return '&darr;';
+        break;
+      case 50:
+        return '&darr;&darr;';
+        break;
+      case -25:
+        return '&uarr;';
+        break;
+      case -50:
+        return '&uarr;&uarr;';
+        break;
+      default:
+        break;
     }
   }
 
@@ -209,29 +247,69 @@ $(document).ready(function(){
   $(document).on('change', '.drug-checkbox',  function(e) {
     let drug = $('label[for="'+$(e.target).attr("name")+'"]')[0];
     let drugName = $('label[for="'+$(e.target).attr("name")+'"]')[0].innerText;
-    
+
     if ($(drug).data('enzyme').split(',')[0] != ''){
       drug = $(drug).data('enzyme').split(',');
     }else{
       drug = null;
     }
-    
+
     let obj = {
       name: drugName,
       enzyme: drug
     }
 
-    if(e.target.checked){
-      drugs.push(obj);
+    if (!findDrug(drugName)){
+  
+      if(e.target.checked){
+        drugs.push(obj);
+      }else{
+        drugs = drugs.filter(( obj ) => {
+          return obj.name != drugName;
+        });
+      }
     }else{
-      drugs.forEach( function(element, index){
-        if (element.toString() == obj.toString()){
-          drugs.splice(index, 1);
-          return false;
-        }
-      });
+      if(!e.target.checked){
+        drugs = drugs.filter(( obj ) => {
+          return obj.name != drugName;
+        });
+      }
     }
+
+    console.log(drugs);
   });
+
+  let findDrug = (name) => {
+    for (let i = 0; i < drugs.length; i++){
+      if (drugs[i].name == name){
+        return true;
+        break;
+      }
+    }
+    return undefined;
+  }
+
+  let formEnzyme = (activityValue) => {
+    switch (true) {
+      case activityValue == 0:
+        return 'Стандартная доза';
+        break;
+      case activityValue > 0 && activityValue <= 25:
+        return 'Снизить дозу на 25%';
+        break;
+      case activityValue >= 50:
+        return 'Заменить';
+        break;
+      case activityValue <= -25 && activityValue > -50:
+        return 'Повысить дозу на 25%';
+        break;
+      case activityValue <= -50:
+        return 'Заменить';
+        break;
+      default:
+        break;
+    }
+  }
 
   // document.getElementById('generate-pdf1').addEventListener('click',  function(e) {
   //   e.preventDefault();
@@ -295,8 +373,8 @@ $(document).ready(function(){
   let drugsArr = new Array();
 
   let formDrugsArr = () => {
-    // console.log(drugs);
-    // console.log(kPolSumArr);
+    console.log(drugs);
+    console.log(kPolSumArr);
 
     drugs.forEach((item, index) => {
       let obj = {
@@ -314,9 +392,7 @@ $(document).ready(function(){
         })
       }
 
-      if (obj.geneSum == 0){
-        obj.geneSum = 'N';
-      }
+      obj.geneSum = formEnzyme(obj.geneSum);
       
       drugsArr.push(obj);
     })
@@ -329,3 +405,4 @@ $(document).ready(function(){
 
   }
 }); 
+
