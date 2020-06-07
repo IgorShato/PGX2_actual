@@ -6,7 +6,7 @@ try{
 	$values = array();
 	parse_str($_POST['formData'], $values);
 
-	// данные пациента
+	// patient data
 	$InputId = $values['InputId'];
 	$InputSurname = $values['InputSurname'];
 	$InputFirstName = $values['InputFirstName'];
@@ -32,41 +32,43 @@ try{
 		$dada = 'dasd';
 	}
 
-	//подключаем библиотеку
+	//library start
 	include('library/tcpdf.php'); 
 
-	//создаем объект 
+	//create the object 
 	$pdf = new TCPDF('P', 'mm', 'A4', true, 'UTF-8');
 		
-	//шрифты
+	//fonts
 	//$pdf->SetFont('Helvetica', '', 19);
-	$pdf->SetFont('dejavusans', '', 14, '', true); // безопасный
+	$pdf->SetFont('dejavusans', '', 14, '', true); // safe
 		
-	//отключаем хедер и футер 
+	//header and footer -off
 	$pdf->setPrintHeader(false);
 	$pdf->setPrintFooter(false);
 
-	//обрыв страницы
+	//break page
 	$pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
 
-	//страница 1 
+	/**
+	 * page 1
+	 */
 	$pdf->AddPage('P', 'A4');
 			
-	//вертикальная позиция для колонки
+	//vertical position 
 	$y = $pdf->getY();
 	
-	//цвет для левой колонки
+	//color for left column 
 	$pdf->SetFillColor(75, 120, 114);
 
 	$left_column = '';
 
-	//левая колонка
+	//left column
 	$pdf->writeHTMLCell(40, '295', '1', '1', $left_column, 0, 0, 1, true, 'J', true);
 
-	//цвет для текста 
+	//color text
 	//$pdf->SetTextColor();
 
-	//главный заголовок
+	//main headline
 	$title = '
 	<div><h1>&nbsp;&nbsp;PharmacoGenomeX<sub>2</sub></h1></div>
 	<style>
@@ -77,11 +79,11 @@ try{
 	</style>
 	';
 
-	//блоки справа 
-	$pdf->WriteHTMLCell(170, 48, '88', '0', "", 1,0); //блок 1
-	$pdf->WriteHTMLCell(120, 33, '101', '1', "$title", 0,0, 'J', true); //блок 2
+	//blocks 
+	$pdf->WriteHTMLCell(170, 48, '88', '0', "", 1,0); //block 1
+	$pdf->WriteHTMLCell(120, 33, '101', '1', "$title", 0,0, 'J', true); //block 2
 
-	//текст интро
+	//intro text
 	$text_intro = '<h4>Результаты генотипирования<br> и рекомендации<br> по персонализированной терапии</h4>
 	<style>
 	h4 {
@@ -92,13 +94,13 @@ try{
 	</style>
 	';
 
-	//вывод контента
+	//output data
 	$pdf->WriteHTMLCell(120, 30, '80', '55', "$text_intro", 0,0);
 
-	//картинка
+	//image
 	$pdf->Image('web_medium.png', 45, 75, 180, 120, 'PNG', '', '', true, 150, '', false, false, 1, false, false, false);
 
-	//таблица данных пациента
+	//patient data table 
 	$table1 = <<<EOD
 	<table>
 	<tr>
@@ -140,10 +142,10 @@ try{
 	</style>
 	EOD;
 
-	//вывод данных
+	//output
 	$pdf->WriteHTMLCell(140, 24, '43', '210', "$table1", 1,0);
 
-	//электронная подпись 
+	//doctor signature 
 	$sign = '<p><strong>Электронная подпись</strong></p>
 	<p>Застрожин Михаил Сергеевич, к.м.н.,<br>руководитель лаборатории генетики МНПЦ наркологии ДЗМ</p>
 	<style>
@@ -155,39 +157,42 @@ try{
 	</style>
 	';
 
-	// вывод подписи 
+	// output signature
 	$pdf->WriteHTMLCell(140, 20, '60', '259', "$sign", 0,0);
 
 
-	//страница 2
+	/**
+	 * page 2
+	 */
 		$pdf->AddPage('P', 'A4');
 
 		
-	//вертикальная позиция для столбца
+	//vertical position 
 	$y = $pdf->getY();
 
-	//левая колонка
-	//цвет фона
+	//left column
+	//background color
 	$pdf->SetFillColor(75, 120, 114);
 
-	//вывод колонки
+	//output column 
 	$pdf->writeHTMLCell(21, '295', '1', '1', $left_column, 0, 0, 1, true, 'J', true);
 
-	//вертикальный текст - начало
+	//vertical text - start
 	$pdf->StartTransform();
+
 	// Rotate of degrees
 	$pdf->Rotate(90, 58, 145);
 	$pdf->SetDrawColor(255);
 	$pdf->SetTextColor(255);
 	$pdf->Text(40, 95, "ОБЩИЕ РЕКОМЕНДАЦИИ");
 
-	//вертикальный текст - конец
+	//vertical text - end
 	$pdf->StopTransform();
 
-	//цвет текста
+	//text color
 	$pdf->SetTextColor(0);
 
-	//таблица данных пациента
+	//patient date 
 	$table1 = <<<EOD
 	<table>
 	<tr>
@@ -229,7 +234,7 @@ try{
 	</style>
 	EOD;
 
-	//вывод таблицы
+	//output date 
 	$pdf->WriteHTMLCell(140, 30, '23', '20', "$table1", 1,0);
 
 	$tableGenesRow = '';
@@ -249,7 +254,7 @@ try{
 		}
 	}
 
-	//таблица генов
+	//table of genes
 	$table_genes = '
 	<table>
 	<tr>
@@ -279,10 +284,11 @@ try{
 	</style>
 	';
 
-	//вывод таблицы
+	//output table 
 	$pdf->WriteHTMLCell(165, '', '25', '64', "$table_genes", 0,0);
 	
-	//текст 
+	/*
+	//text
 	$text_page2 = '
 	<p>Имеются данные, свидетельствующие о наличии генетически обусловленных отклонений в скорости метаболизма, что может увеличить риск развития нежелательных реакций на назначаемые лекарственные препараты и, в связи с этим, недостаточной эффективности терапии.</p>
 	<p>Снижение активности CYP2C19, CYP2D6, CYP3A5 и ABCB1 будет приводить к замедлению элиминации большей части лекарственных средств: антидепрессантов, антипсихотиков, транквилизаторов и антиконвульсантов, то есть к возрастанию риска развития нежелательных реакций. 
@@ -295,10 +301,10 @@ try{
 	</style>
 	';
 
-	// вывод текста
+	// output text
 	$pdf->WriteHTMLCell(160, 90, '30', '150', "$text_page2", 0,0);
 
-	// треугольники
+	// triangles 
 	$style = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'phase' => 0, 'color' => array(0, 0, 0));
 	$style2 = array('width' => 0.5, 'cap' => 'butt', 'join' => 'miter', 'dash' => 0, 'color' => array(0, 0, 0));
 	$style3 = array('width' => 0.5, 'cap' => 'round', 'join' => 'round', 'dash' => 0, 'color' => array(0, 0, 0));
@@ -314,14 +320,14 @@ try{
 	$pdf->Line(40, 219, 40, 270, $style2); //вертикальная линия
 	$pdf->Line(42, 244, 196, 244, $style3); //горизонтальная линия
 
-	//текст
+	//text
 	$pdf->WriteHTMLCell(15, 10, '27', '218', "<small>200%</small>");
 	$pdf->WriteHTMLCell(15, 10, '27', '230', "<small>150%</small>");
 	$pdf->WriteHTMLCell(15, 10, '27', '242', "<small>100%</small>");
 	$pdf->WriteHTMLCell(15, 10, '29', '254', "<small>50%</small>");
 	$pdf->WriteHTMLCell(15, 10, '30', '266', "<small>0%</small>");
 
-	//текст
+	//text
 	$pdf->WriteHTMLCell(30, 20, '28', '277', "<small>Активность</small>");
 	$pdf->WriteHTMLCell(30, 20, '50', '277', "<small>CYP2C19*2</small>");
 	$pdf->WriteHTMLCell(30, 20, '72', '277', "<small>CYP2C19*3</small>");
@@ -331,7 +337,7 @@ try{
 	$pdf->WriteHTMLCell(30, 20, '160', '277', "<small>CYP3A5*3</small>");
 	$pdf->WriteHTMLCell(30, 20, '182', '277', "<small>ABCB1*6</small>");
 
-	// треугольник вверх 
+	// triangle up
 	$pdf->RegularPolygon(104, 238, 12, 3, 60, '', 'DF', $style6, array(50, 59, 159));
 	// текст треугольника
 	$persent_up = '
@@ -345,7 +351,7 @@ try{
 	';
 	$pdf->WriteHTMLCell(20, 20, '98', '235', $persent_up);
 
-	// треугольник низ 
+	// triangle down 
 	$pdf->RegularPolygon(125, 250, 12, 3, 0, '', 'DF', $style6, array(168, 24, 48));
 	// текст треугольника 
 	$persent_down = '
@@ -359,19 +365,18 @@ try{
 	';
 	$pdf->WriteHTMLCell(20, 20, '120', '249', $persent_down);
 
-
-
-	//страница 3
+/*
+	//page 3
 		$pdf->AddPage('L', 'A4');
 		
-		//таблица
-	// цвет фона
+		//table
+	// background color
 	$pdf->SetFillColor(75, 120, 114);
 
-	// цвет текста
+	// text color
 	//$pdf->SetTextColor(255, 255, 255);
 
-	// хедер таблицы
+	// header
 	$header_table_spec = '
 	<br><h4>СПЕЦИФИЧЕСКИЕ РЕКОМЕНДАЦИИ</h4>
 	<style>
@@ -386,7 +391,7 @@ try{
 
 	$pdf->writeHTMLCell(288, '24', '4', '4', $header_table_spec, 0, 0, 1, true, 'J', true);
 
-	//таблица
+	//table
 	$table_spec = '
 	<table>
 	<tr>
@@ -464,17 +469,21 @@ try{
 	</style>
 	';
 
-	//вывод таблицы
+	//output table 
 	$pdf->WriteHTMLCell(290, 15, '3', '30', "$table_spec", 0, 0);
 
-	//страница 4
+	*/
+	
+	/**
+	 * page 3
+	 */
 		$pdf->AddPage('L', 'A4');
 		
-		//таблица
-	//цвет фона
+		//table
+	//background color
 	$pdf->SetFillColor(75, 120, 114);
 
-	// цвет текста
+	// text color
 	//$pdf->SetTextColor(255, 255, 255);
 
 	$tableDrugsRow = '';
@@ -495,7 +504,7 @@ try{
 		}
 	}
 
-	// хедер таблицы
+	// header
 	$header_table_extended = '
 	<br><h4>РАСШИРЕННЫЕ РЕКОМЕНДАЦИИ</h4>
 	<style>
@@ -511,7 +520,7 @@ try{
 	$pdf->writeHTMLCell(288, '24', '4', '4', $header_table_extended, 0, 0, 1, true, 'J', true);
 
 
-	//таблица
+	//table 
 	$table_extended = '
 	<table>
 		<tr>
@@ -545,19 +554,18 @@ try{
 	</style>
 	';
 
-	//вывод таблицы
+	//output table 
 	$pdf->WriteHTMLCell(290, 15, '3', '30', "$table_extended", 0, 0); 
 
 
-
-	// 	//страница 5
+	// 	//page 5
 	// 	$pdf->AddPage('L', 'A4');
 		
-	// 	//таблица
-	// //цвет фона
+	// 	//table
+	// //background color
 	// $pdf->SetFillColor(75, 120, 114);
 
-	// // цвет текста
+	// //text color 
 	// //$pdf->SetTextColor(255, 255, 255);
 
 	// $tableKPolSumRow = '';
@@ -578,7 +586,7 @@ try{
 	// 	}
 	// }
 
-	// // хедер таблицы
+	// // header
 	// $header_table_newName = '
 	// <br><h4>РАСШИРЕННЫЕ РЕКОМЕНДАЦИИ</h4>
 	// <style>
@@ -594,7 +602,7 @@ try{
 	// $pdf->writeHTMLCell(288, '24', '4', '4', $header_table_newName, 0, 0, 1, true, 'J', true);
 
 
-	// //таблица
+	// //table
 	// $table_newName = '
 	// <table>
 	// 	<tr>
@@ -628,14 +636,15 @@ try{
 	// </style>
 	// ';
 
-	// //вывод таблицы
+	// //output table 
 	// $pdf->WriteHTMLCell(290, 15, '3', '30', "$table_newName", 0, 0); 
 	$pdf->Output('PharmacoGenomeX2 - Report.pdf', 'I');
 
-	//вывод данных
+	//output date
 	return $pdf;
 
 }catch (PDOExeption $e){
 	return $e->getMessage;
 }
+ 
  
