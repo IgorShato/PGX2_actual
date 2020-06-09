@@ -524,7 +524,7 @@ try{
 	$table_extended = '
 	<table>
 		<tr>
-		<th style="color: #FFFFFF; background-color: #5DACA1;">СИОЗС</th>
+		<th style="color: #FFFFFF; background-color: #5DACA1;">ЛЕКАРСТВО</th>
 		<th style="color: #FFFFFF; background-color: #5DACA1;">РЕКОМЕНДАЦИИ</th>
 		<th style="color: #FFFFFF; background-color: #5DACA1;">ФАРМАКО<br>ДИНАМИКА</th>
 		<th style="color: #FFFFFF; background-color: #5DACA1;">ДЕЙСТВИЕ</th>
