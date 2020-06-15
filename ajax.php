@@ -1,4 +1,4 @@
-  <?php
+<?php
   $action = $_POST['action'];
 
   include './config.php';
@@ -115,7 +115,7 @@
         $rezult_drugSubgroups = $statement->fetchAll(PDO::FETCH_ASSOC);
 
         $output .= '
-          <div class="card">
+          <div class="card" data-id="card'.($key1 + 1).'">
             <div class="card-header" id="headingOne">
               <h5 class="mb-0">
               <input type="checkbox" name="" data-collapse="true" data-collapse-target="collapse'.($key1 + 1).'">
@@ -132,22 +132,22 @@
 ';
 
         foreach ($rezult_drugSubgroups as $key2 => $value2){
-          $statement = $pdo->prepare("SELECT ID, Drug_Name_ru, Primary_Enzyme_1, Primary_Enzyme_2, Secondary_Enzyme_1, Secondary_Enzyme_2, Secondary_Enzyme_3, Pharmacodynamic_Gene FROM spec WHERE Subgroup_Name_ru = :subgroup_name");
+          $statement = $pdo->prepare("SELECT ID, Drug_Name_ru, Primary_Enzyme_1, Primary_Enzyme_2, Secondary_Enzyme_1, Secondary_Enzyme_2, Secondary_Enzyme_3, Pharmacodynamic_Gene FROM general_data WHERE Subgroup_Name_ru = :subgroup_name");
           $statement->bindValue(':subgroup_name', $value2['Subgroup_Name_ru']);
           $statement->execute();
           $rezult_drugName = $statement->fetchAll(PDO::FETCH_ASSOC);
 
           $output .= '
                 <input type="checkbox" name="" id="checkbox" class="panel-collapse" data-collapse="true" data-collapse-target-panel="'.$key2.'">
-                <button class="accordion">'.$value2['Subgroup_Name_ru'].'</button>
-                <div class="panel" panel-id="'.$key2.'">';
+                <button class="accordion" data-id="acc'.($key2 + 1).'" data-parent="card'.($key1 + 1).'">'.$value2['Subgroup_Name_ru'].'</button>
+                <div class="panel" panel-id="'.$key2.'" data-parent="acc'.($key2 + 1).'">';
 
           foreach ($rezult_drugName as $key3 => $value3){
             $arr = array($value3['Primary_Enzyme_1'], $value3['Primary_Enzyme_2'], $value3['Secondary_Enzyme_1'], $value3['Secondary_Enzyme_2'], $value3['Secondary_Enzyme_3']);
             $arr = array_filter($arr);
 
             $output .= '
-              <input type="checkbox" id="'.$value3['ID'].'" name="'.$value3['ID'].'" class="drug-checkbox" /><label for="'.$value3['ID'].'" data-enzyme="'.implode(',', $arr).'">'.$value3['Drug_Name_ru'].'</label>
+              <input type="checkbox" id="'.$value3['ID'].'" name="'.$value3['ID'].'" class="drug-checkbox" /><label for="'.$value3['ID'].'" data-enzyme="'.implode(',', $arr).'" data-pharmacodynamic-gene="'.$value3['Pharmacodynamic_Gene'].'">'.$value3['Drug_Name_ru'].'</label>
             ';
           }
           $output .= '</div>';
