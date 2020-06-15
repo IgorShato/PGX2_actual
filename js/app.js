@@ -1,4 +1,3 @@
-
 /**
  * Import
  */
@@ -49,7 +48,7 @@ $(document).ready(function(){
       }else{
         $('.tab-pane[data-category-name="'+ curCategory +'"]').addClass('active');
       }
-    }, 100);
+    }, 150);
   }
 
   // load all gene data and display active gene data
@@ -242,51 +241,55 @@ $(document).ready(function(){
     return undefined;
   }
 
-  let drugs = new Array();
+/**
+ * 
+ */
 
-  $(document).on('change', '.drug-checkbox',  function(e) {
-    let drug = $('label[for="'+$(e.target).attr("name")+'"]')[0];
-    let drugName = $('label[for="'+$(e.target).attr("name")+'"]')[0].innerText;
-
-    if ($(drug).data('enzyme').split(',')[0] != ''){
-      drug = $(drug).data('enzyme').split(',');
-    }else{
-      drug = null;
-    }
-
-    let obj = {
-      name: drugName,
-      enzyme: drug
-    }
-
-    if (!findDrug(drugName)){
-  
-      if(e.target.checked){
-        drugs.push(obj);
-      }else{
-        drugs = drugs.filter(( obj ) => {
-          return obj.name != drugName;
-        });
-      }
-    }else{
-      if(!e.target.checked){
-        drugs = drugs.filter(( obj ) => {
-          return obj.name != drugName;
-        });
-      }
-    }
-
-    console.log(drugs);
-  });
-
-  let findDrug = (name) => {
-    for (let i = 0; i < drugs.length; i++){
-      if (drugs[i].name == name){
-        return true;
-        break;
+  let findDrugGroup = (groupName) => {
+    for (let i = 0; i < drugsArr.length; i++){
+      if (drugsArr[i].drugGroup == groupName){
+        return i;
       }
     }
     return undefined;
+  }
+
+  let findDrugCat = (groupIndex, catName) => {
+    for (let i = 0; i < drugsArr[groupIndex].categories.length; i++){
+      if (drugsArr[groupIndex].categories[i].catName == catName){
+        return i;
+      }
+    }
+    return undefined;
+  }
+
+  let findDrug = (groupIndex, catIndex, drugName) => {
+    for (let i = 0; i < drugsArr[groupIndex].categories[catIndex].drugs.length; i++){
+      if (drugsArr[groupIndex].categories[catIndex].drugs[i].name == drugName){
+        return i;
+      }
+    }
+    return undefined;
+  }
+
+  let getDrugKPolSum = (enzyme) => {
+    let genKPolSum = 0;
+
+    if ($(enzyme).data('enzyme').split(',')[0] != ''){
+      this.enzyme = $(enzyme).data('enzyme').split(',');
+
+      this.enzyme.forEach((item, index) => {
+        let genIndex = findGen(item);
+        
+        if (genIndex != undefined){
+          genKPolSum = genKPolSum + kPolSumArr[genIndex].kPolSum;
+        }
+      })
+    }else{
+      genKPolSum = 0;
+    }
+
+    return formEnzyme(genKPolSum);
   }
 
   let formEnzyme = (activityValue) => {
@@ -310,6 +313,96 @@ $(document).ready(function(){
         break;
     }
   }
+
+  let drugsArr = new Array();
+
+  $(document).on('change', '.drug-checkbox',  function(e) {
+    let drug = $('label[for="'+$(e.target).attr("name")+'"]')[0];
+    let drugName = $('label[for="'+$(e.target).attr("name")+'"]')[0].innerText;
+    let drugCategory = $(e.target).closest('.card-body').find('button[data-id="'+$(e.target).closest('.panel').data('parent')+'"]')[0];
+    let drugGroup = $(e.target).closest('div[data-id="'+drugCategory.dataset.parent+'"').find('button[data-toggle]')[0];
+    let drugPharmGene = () => {
+      if ($('label[for="'+$(e.target).attr("name")+'"]')[0].dataset.pharmacodynamicGene){
+        return $('label[for="'+$(e.target).attr("name")+'"]')[0].dataset.pharmacodynamicGene;
+      }else{
+        return '&mdash;'
+      }  
+    }
+
+    if (e.target.checked){
+      let groupIndex = findDrugGroup(drugGroup.innerText);
+      if (groupIndex != undefined){
+  
+        let catIndex = findDrugCat(groupIndex, drugCategory.innerText);
+        if (catIndex != undefined){
+  
+          let drugIndex = findDrug(groupIndex, catIndex, drugName);
+          if (drugIndex == undefined){
+            drugsArr[groupIndex].categories[catIndex].drugs.push({
+              name: drugName,
+              geneSum: getDrugKPolSum(drug),
+              pharmGene: drugPharmGene()
+            })
+          }
+        }else{
+          drugsArr[groupIndex].categories.push({
+            catName: drugCategory.innerText,
+            drugs: [
+              {
+                name: drugName,
+                geneSum: getDrugKPolSum(drug),
+                pharmGene: drugPharmGene()
+              }
+            ]
+          })
+        }
+      }else{
+        drugsArr.push(
+          {
+            drugGroup: drugGroup.innerText,
+            categories: [
+              {
+                catName: drugCategory.innerText,
+                drugs: [
+                  {
+                    name: drugName,
+                    geneSum: getDrugKPolSum(drug),
+                    pharmGene: drugPharmGene()
+                  }
+                ]
+              }
+            ]
+          }
+        )
+      }
+    }else{
+      console.log('delete');
+      let groupIndex = findDrugGroup(drugGroup.innerText);
+      console.log(groupIndex);
+      if (groupIndex != undefined){
+        console.log('delete2');
+        let catIndex = findDrugCat(groupIndex, drugCategory.innerText);
+        if (catIndex != undefined){
+          console.log('delete3');
+          let drugIndex = findDrug(groupIndex, catIndex, drugName);
+          if (drugIndex != undefined){
+            if (drugsArr[groupIndex].categories[catIndex].drugs.length <= 1){
+              drugsArr[groupIndex].categories.splice(catIndex, 1);
+            }else{
+              drugsArr[groupIndex].categories[catIndex].drugs.splice(drugIndex, 1);
+            }
+          }
+        }
+      }
+
+      if (drugsArr[groupIndex].categories.length == 0){
+        drugsArr.splice(groupIndex, 1);
+      }
+    }
+
+    console.log(drugsArr);
+    
+  });
 
   // document.getElementById('generate-pdf1').addEventListener('click',  function(e) {
   //   e.preventDefault();
@@ -340,7 +433,6 @@ $(document).ready(function(){
     e.preventDefault();
 
     let formData = $('#pdf-form').serialize();
-    let drugData = formDrugsArr();
 
     $.ajax({   
       url: 'report.php',
@@ -351,7 +443,7 @@ $(document).ready(function(){
       data: {
         formData: formData,
         columns: columns,
-        drugs: drugData,
+        drugs: drugsArr,
         kPolSum: kPolSumArr
       },
       success: function(res){
@@ -369,40 +461,5 @@ $(document).ready(function(){
       }
     }); 
   });
-
-  let drugsArr = new Array();
-
-  let formDrugsArr = () => {
-    console.log(drugs);
-    console.log(kPolSumArr);
-
-    drugs.forEach((item, index) => {
-      let obj = {
-        name: item.name,
-        geneSum: 0
-      };
-
-      if (item.enzyme != null){
-        item.enzyme.forEach((item, index) => {
-          let genIndex = findGen(item);
-
-          if (genIndex != undefined){
-            obj.geneSum = obj.geneSum + kPolSumArr[genIndex].kPolSum;
-          }
-        })
-      }
-
-      obj.geneSum = formEnzyme(obj.geneSum);
-      
-      drugsArr.push(obj);
-    })
-
-    return drugsArr;
-  }
-  
-
-  let formRecommendationTableData = (kPolSumArr, drugsArr) => {
-
-  }
 }); 
 
