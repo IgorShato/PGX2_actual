@@ -279,7 +279,7 @@ try{
 
 	//вывод таблицы
 	$pdf->WriteHTMLCell(165, '', '25', '64', "$table_genes", 0,0);
-	
+
 	/*
 	//текст 
 	$text_page2 = '
@@ -357,6 +357,7 @@ try{
 	</style>
 	';
 	$pdf->WriteHTMLCell(20, 20, '120', '249', $persent_down);
+
 
 
 	//страница 3
@@ -515,29 +516,31 @@ try{
 			$table_extended = '
 				<style>
 					th {
-						font-size: 12px;
-						color: #000000;
-						background-color: #FFFFFF;
-						text-align: left;
-						border: solid 1px #4B7872;
+						font-size: 11.5px;
+						color: #FFFFFF;
+						background-color: #4B7872;
+						text-align: center;
+						border: solid 1px #FFFFFF;
 					}
 					td {
 						font-size: 10px;
 						text-align: center;
+						font-weight: bold;
 						color: #000000;
-						border: solid 1px #4B7872;
+						border: solid 1px #A5C5C1;
+						height: 20px;
 					}
 				</style>
 
 				<table>
 					<tr nobr="true">
-						<th style="color: #FFFFFF; background-color: #5DACA1; text-align: center; border: solid 1px #FFFFFF;">ЛЕКАРСТВО</th>
-						<th style="color: #FFFFFF; background-color: #5DACA1; text-align: center; border: solid 1px #FFFFFF;">РЕКОМЕНДАЦИИ</th>
-						<th style="color: #FFFFFF; background-color: #5DACA1; text-align: center; border: solid 1px #FFFFFF;">ФАРМАКО<br>ДИНАМИКА</th>
-						<th style="color: #FFFFFF; background-color: #5DACA1; text-align: center; border: solid 1px #FFFFFF;">ДЕЙСТВИЕ</th>
-						<th style="color: #FFFFFF; background-color: #5DACA1; text-align: center; border: solid 1px #FFFFFF;">ФАРМАКО<br>КИНЕТИКА</th>
-						<th style="color: #FFFFFF; background-color: #5DACA1; text-align: center; border: solid 1px #FFFFFF;">ДЕЙСТВИЕ</th>
-						<th style="color: #FFFFFF; background-color: #5DACA1; text-align: center; border: solid 1px #FFFFFF;">ПОЛИПРАГМАЗИЯ<br>И ДРУГИЕ ФАКТОРЫ</th>
+						<th style="color: #FFFFFF; background-color: #5DACA1;">ЛЕКАРСТВО</th>
+						<th style="color: #FFFFFF; background-color: #5DACA1;">РЕКОМЕНДАЦИИ</th>
+						<th style="color: #FFFFFF; background-color: #5DACA1;">ФАРМАКО<br>ДИНАМИКА</th>
+						<th style="color: #FFFFFF; background-color: #5DACA1;">ДЕЙСТВИЕ</th>
+						<th style="color: #FFFFFF; background-color: #5DACA1;">ФАРМАКО<br>КИНЕТИКА</th>
+						<th style="color: #FFFFFF; background-color: #5DACA1;">ДЕЙСТВИЕ</th>
+						<th style="color: #FFFFFF; background-color: #5DACA1;">ПОЛИПРАГМАЗИЯ<br>И ДРУГИЕ ФАКТОРЫ</th>
 					</tr>
 			';
 			foreach($column['categories'] as $key2 => $category){
@@ -546,20 +549,21 @@ try{
 				foreach($category['drugs'] as $key3 => $drug){
 					$tableDrugsRow .= 
 					'<tr nobr="true">
-						<td style="color: #4B7872; font-weight: bold">'.$drug['name'].'</td>
+						<td style="color: #4B7872">'.$drug['name'].'</td>
 						<td style="font-weight: regular">'.$drug['geneSum'].'</td>
 						<td style="font-weight: regular">'.$drug['pharmGene'].'</td>
-						<td></td>
-						<td></td>
+						<td style="font-weight: regular"></td>
+						<td style="font-weight: regular">'.$drug['enzyme'].'</td>
 						<td></td>
 						<td></td>
 					</tr>';
 				}
 
+
 				//таблица
 				$table_extended .= '
 					<tr>
-						<th colspan="7" style="text-align: center; background-color: #4B7872; color: #FFFFFF";>'.$categorieName.'</th>
+						<th colspan="7" style="text-align: center; background-color: #4B7872; color: #FFFFFF">'.$categorieName.'</th>
 					</tr>
 					'.$tableDrugsRow.'
 				';
