@@ -321,6 +321,7 @@ $(document).ready(function(){
     let drugName = $('label[for="'+$(e.target).attr("name")+'"]')[0].innerText;
     let drugCategory = $(e.target).closest('.card-body').find('button[data-id="'+$(e.target).closest('.panel').data('parent')+'"]')[0];
     let drugGroup = $(e.target).closest('div[data-id="'+drugCategory.dataset.parent+'"').find('button[data-toggle]')[0];
+    let drugEnzyme = $(drug).data('enzyme').split(',');
     let drugPharmGene = () => {
       if ($('label[for="'+$(e.target).attr("name")+'"]')[0].dataset.pharmacodynamicGene){
         return $('label[for="'+$(e.target).attr("name")+'"]')[0].dataset.pharmacodynamicGene;
@@ -341,7 +342,8 @@ $(document).ready(function(){
             drugsArr[groupIndex].categories[catIndex].drugs.push({
               name: drugName,
               geneSum: getDrugKPolSum(drug),
-              pharmGene: drugPharmGene()
+              pharmGene: drugPharmGene(),
+              enzyme: drugEnzyme.join(' ')
             })
           }
         }else{
@@ -351,7 +353,8 @@ $(document).ready(function(){
               {
                 name: drugName,
                 geneSum: getDrugKPolSum(drug),
-                pharmGene: drugPharmGene()
+                pharmGene: drugPharmGene(),
+                enzyme: drugEnzyme.join(' ')
               }
             ]
           })
@@ -367,7 +370,8 @@ $(document).ready(function(){
                   {
                     name: drugName,
                     geneSum: getDrugKPolSum(drug),
-                    pharmGene: drugPharmGene()
+                    pharmGene: drugPharmGene(),
+                    enzyme: drugEnzyme.join(' ')
                   }
                 ]
               }
@@ -404,30 +408,6 @@ $(document).ready(function(){
     
   });
 
-  // document.getElementById('generate-pdf1').addEventListener('click',  function(e) {
-  //   e.preventDefault();
-
-  //   let formData = $('#pdf-form').serialize();
-
-  //   $.ajax({   
-  //     url: 'report.php',
-  //     type: 'POST',
-  //     dataType: 'json',
-  //     data: {
-  //       formData: formData,
-  //       columns: columns,
-  //       drugs: drugs,
-  //       kPolSum: kPolSumArr
-  //     },
-  //     success: function(res){
-  //       console.log(res);
-        
-  //     },
-  //     error: function(jqxhr, status, exception) {
-  //       console.log('Exception:', exception);
-  //     }
-  //   }); 
-  // });
 
   document.getElementById('generate-pdf1').addEventListener('click',  function(e) {
     e.preventDefault();
