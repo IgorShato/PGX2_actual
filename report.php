@@ -552,18 +552,17 @@ try{
 						<td style="color: #4B7872">'.$drug['name'].'</td>
 						<td style="font-weight: regular">'.$drug['geneSum'].'</td>
 						<td style="font-weight: regular">'.$drug['pharmGene'].'</td>
-						<td style="font-weight: regular"></td>
+						<td style="font-weight: regular">'.$drug['fdAction'].'</td>
 						<td style="font-weight: regular">'.$drug['enzyme'].'</td>
-						<td></td>
+						<td style="font-weight: regular">'.$drug['fcAction'].'</td>
 						<td></td>
 					</tr>';
 				}
 
-
 				//таблица
 				$table_extended .= '
 					<tr>
-						<th colspan="7" style="text-align: center; background-color: #4B7872; color: #FFFFFF">'.$categorieName.'</th>
+						<th colspan="7" style="text-align: center; background-color: #4B7872; color: #FFFFFF;">'.$categorieName.'</th>
 					</tr>
 					'.$tableDrugsRow.'
 				';
