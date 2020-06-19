@@ -191,7 +191,7 @@ $(document).ready(function(){
         }
       });
     }
-    // console.log(columns);
+    console.log(columns);
   });
 
   let kPolSumArr = new Array();
@@ -314,6 +314,31 @@ $(document).ready(function(){
     }
   }
 
+  let formAction = (enzyme) => {
+    let intersection = kPolSumArr.filter(element => enzyme.includes(element.gen));
+    let sum = intersection.reduce((acc, val) => { return acc + val.kPolSum; }, 0);
+
+    switch (true) {
+      case sum == 0:
+        return 'N';
+        break;
+      case sum == 25:
+        return '&darr;';
+        break;
+      case sum >= 50:
+        return '&darr;&darr;';
+        break;
+      case sum == -25:
+        return '&uarr;';
+        break;
+      case sum <= -50:
+        return '&uarr;&uarr;';
+        break;
+      default:
+        break;
+    }
+  }
+
   let drugsArr = new Array();
 
   $(document).on('change', '.drug-checkbox',  function(e) {
@@ -343,7 +368,9 @@ $(document).ready(function(){
               name: drugName,
               geneSum: getDrugKPolSum(drug),
               pharmGene: drugPharmGene(),
-              enzyme: drugEnzyme.join(' ')
+              enzyme: drugEnzyme.join(' '),
+              fcAction: formAction(drugEnzyme),
+              fdAction: formAction($('label[for="'+$(e.target).attr("name")+'"]')[0].dataset.pharmacodynamicGene)
             })
           }
         }else{
@@ -354,7 +381,9 @@ $(document).ready(function(){
                 name: drugName,
                 geneSum: getDrugKPolSum(drug),
                 pharmGene: drugPharmGene(),
-                enzyme: drugEnzyme.join(' ')
+                enzyme: drugEnzyme.join(' '),
+                fcAction: formAction(drugEnzyme),
+                fdAction: formAction($('label[for="'+$(e.target).attr("name")+'"]')[0].dataset.pharmacodynamicGene)
               }
             ]
           })
@@ -371,7 +400,9 @@ $(document).ready(function(){
                     name: drugName,
                     geneSum: getDrugKPolSum(drug),
                     pharmGene: drugPharmGene(),
-                    enzyme: drugEnzyme.join(' ')
+                    enzyme: drugEnzyme.join(' '),
+                    fcAction: formAction(drugEnzyme),
+                    fdAction: formAction($('label[for="'+$(e.target).attr("name")+'"]')[0].dataset.pharmacodynamicGene)
                   }
                 ]
               }
@@ -405,9 +436,32 @@ $(document).ready(function(){
     }
 
     console.log(drugsArr);
-    
   });
 
+  // document.getElementById('generate-pdf1').addEventListener('click',  function(e) {
+  //   e.preventDefault();
+
+  //   let formData = $('#pdf-form').serialize();
+
+  //   $.ajax({   
+  //     url: 'report.php',
+  //     type: 'POST',
+  //     dataType: 'json',
+  //     data: {
+  //       formData: formData,
+  //       columns: columns,
+  //       drugs: drugs,
+  //       kPolSum: kPolSumArr
+  //     },
+  //     success: function(res){
+  //       console.log(res);
+        
+  //     },
+  //     error: function(jqxhr, status, exception) {
+  //       console.log('Exception:', exception);
+  //     }
+  //   }); 
+  // });
 
   document.getElementById('generate-pdf1').addEventListener('click',  function(e) {
     e.preventDefault();
