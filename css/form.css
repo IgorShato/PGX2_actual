@@ -1,23 +1,43 @@
-
+/* typography 
+html {
+  font-size: 1rem;
+}
+@include media-breakpoint-up(sm) {
+  html {
+    font-size: 1.2rem;
+  }
+}
+@include media-breakpoint-up(md) {
+  html {
+    font-size: 1.4rem;
+  }
+}
+@include media-breakpoint-up(lg) {
+  html {
+    font-size: 1.6rem;
+  }
+}
+*/
+body {
+  font-family: Helvetica, Arial, sans-serif;
+}
+/* panel */
 .panel>* {
   float: left;
 }
-
 .panel>input {
   clear: both;
 }
-
 .list-group.active{
   display: block;
 }
 .list-group{
   display: none;
 }
-
-/*  кнопка выбора маркера */
+/*  select markers */
 .list-group-item.active {
   /*z-index: 2;*/
-  color: #fff;
+  color: #FFFFFF;
   background-color: #4B7872;
   border-color: #FFFFFF;
   width: 150px;
@@ -33,7 +53,7 @@
 .list-group-item:hover {
   background-color: #DEDEDE;
 }
-/* таблица */
+/* table */
   td {
     line-height: 1.2;
 }
@@ -44,33 +64,31 @@
     color: #3d3d3d;
     font-size: 12.5px;
   }
-  /* пользовательский стиль таблицы*/
+  /* table - user styles */
   .td_head {
     font-size: 14px;
     text-align: center;
     font-weight: bold;
     border: solid 1px #FFFFFF;
     background-color: #3d3d3d; /*#DCDCDC;*/
-    color: #FFFFFF; /*#000000;*/
+    color: #FFFFFF;
     padding-left: 40px;
     padding-right: 40px;
   }
   .tab-content {
     margin-left: -40px;
   }
-
-/* селект */
+/* select */
 .select {
   cursor: pointer;
   height: 42px;
   background-color: #DCDCDC;
 }
-/* галочка */
+/* checkbox */
 .checkbox2 {
   cursor: pointer;
 }
-
-/* кнопка выбора направления */
+/* select way button */
 .nav-link {
   width: 200px;
   text-align: center;
@@ -90,14 +108,13 @@
   background-color: #4B7872!important;
   border: solid 1px #757575;
 }
-
 input[type="checkbox"] {
   position: relative;
   right: 1px;
   cursor: pointer;
   color: #4B7872;
 }
-/* */
+/* accordion */
 .accordion {
     cursor: pointer;
     text-align: left;
@@ -110,4 +127,78 @@ input[type="checkbox"] {
 .modal-content {
     width: 600px;
 }
-    
+/* Style the input fields 
+input {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+}
+*/
+/* Mark input boxes that gets an error on validation: 
+input.invalid {
+  background-color: #ffdddd;
+}
+*/
+/* Hide all steps by default */
+.tab {
+  display: none;
+}
+/* Make circles that indicate the steps */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+/* Mark the active step */
+.step.active {
+  opacity: 1;
+}
+/* Mark the steps that are finished and valid */
+.step.finish {
+  background-color: #4B7872;
+}
+/* sections 
+.section {
+  margin-left: 80px;
+  margin-right: 80px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border: solid 1px #CBD9D7;
+  background-color: #ECEEEE;
+}
+*/
+/* patient form */
+.form-control {
+  /*background-color: #CBD9D7;*/
+  border-radius: 5px;
+}
+/* report button */
+.btn-report {
+  background-color: #4B7872;
+  color: #FFFFFF;
+  margin-left: 80%;
+  font-size: 20px;
+}
+/**/
+legend {
+  color: #FFFFFF;
+  background-color: #4B7872;
+  border: solid 1px #4B7872;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.container-form {
+  border: solid 1px #F5F5F5;
+  padding: 40px 40px 40px 40px;
+  background-color: #F5F5F5;
+}
+
+
