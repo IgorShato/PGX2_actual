@@ -20,14 +20,14 @@
 
   <form action="report.php" method="POST" target="_blank" id="pdf-form">
 
-  <section class="" id="">
+  <section class="section">
     <br>
     <div class="container">
-      <h2>/Шаг 1</h2>
-      <h2>Insert the Data</h2>
-      <p>Do not change the genotype, if you don’t know it ("wild" types is default).</p><br>
-
+      <h2 style="text-align: center;">Внесите результаты генотипирования</h2><br>
+</div>
       <!-- выбираем направление  -->
+
+<div class="container">
       <div class="row">
         <div class="col-3">
           <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -35,7 +35,7 @@
                   $statement = $pdo->prepare("SELECT * FROM category");
                   $statement->execute();
                   $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-
+                  
                   foreach($data as $key => $value):
                      ?>
             <a class="nav-link <?php if ($key == 0){echo 'active';} ?>" id="v-pills-home-tab" data-toggle="pill"
@@ -62,21 +62,24 @@
           </div>
         </div>
       </div><br>
-     
+      <!-- 
+      <button type="button" class="btn btn-outline-secondary" href="#">&larr; Назад</button>
+      <button type="button" class="btn btn-outline-success" href="#">Дальше &rarr;</button>
+      -->
     </div>
     </div>
 
     </div>
     </div>
-
+                  </div>     
     </div><br>
   </section>
 
   <!-- Шаг 2 -->
-  <section class="" id="">
+  <section class="section">
     <div class="container">
-      <h2>/Шаг 2</h2>
-      <h3>Choose the Groups of Drugs</h3><br>
+      <h2>Выберите лекарства, которые необходимо включить в отчет</h2>
+    <br>
       
         <style>
         .someclass {
@@ -122,7 +125,7 @@
         $statement = $pdo->prepare("SELECT * FROM category");
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
-
+        
         foreach($data as $key => $value):
       ?>
 
@@ -137,95 +140,175 @@
   <br><br>
   <!-- шаг 3 -->
 
-  <section class="" id="user-info">
+  <section class="section" id="">
     <div class="container">
-      <h2>/Шаг 3</h2>
-      <h3>Information about patient and organzation</h3>
-      <small id="" class="form-text text-muted">fields marked with * are required</small>
-      <br>
+      <fieldset>
+        <legend>
+      <h2 class="text-form" style="text-align: center;">Внесите данные пациента</h2> 
+      <p class="lead" style="text-align: center; color: #FFFFFF; font-size: 16px;">Если данные отсутствуют &mdash; оставьте поле пустым</p>
+        </legend>
+        </fieldset>
 
-      <div class="form-group">
-        <label for="InputId">ID*</label>
-        <input type="text" name="InputId" class="form-control" id="" aria-describedby="" placeholder="" value="ID">
+      <!-- данные пациента - поля -->
+      <div class="container container-form">
+  <div class="form-group row">
+    <label for="InputId" class="col-sm-2 col-form-label">ID</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control is-valid" name="InputId" placeholder="Введите ID" autofocus>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="InputSurname" class="col-sm-2 col-form-label">Фамилия</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control is-valid" name="InputSurname" placeholder="Введите фамилию">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="InputFirstName" class="col-sm-2 col-form-label">Имя</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control is-valid" name="InputFirstName" placeholder="Введите имя">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="InputSecondName" class="col-sm-2 col-form-label">Отчество</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control is-valid" name="InputSecondName" placeholder="Введите отчество">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="InputBirth" class="col-sm-2 col-form-label">Дата рождения</label>
+    <div class="col-sm-10">
+      <input type="date" class="form-control is-valid" name="InputBirth" placeholder="01.01.1970">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="InputHeight" class="col-sm-2 col-form-label">Рост</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control is-valid" name="InputHeight" placeholder="Введите рост">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="InputWeight" class="col-sm-2 col-form-label">Вес</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control is-valid" name="InputWeight" placeholder="Введите вес">
+    </div>
+  </div>
+
+  <div class="form-group row">
+  <label for="InputSex" class="col-sm-2 col-form-label">Пол (муж/жен)</label>
+  <div class="col-sm-10">
+    <select class="form-control is-valid" name="InputSex">
+    <option selected>Выберите пол</option>
+      <option>муж</option>
+      <option>жен</option>
+    </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="InputRase" class="col-sm-2 col-form-label">Раса</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control is-valid" name="InputRase" placeholder="Введите расу">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="InputDate" class="col-sm-2 col-form-label">Дата</label>
+    <div class="col-sm-10">
+      <input type="date" class="form-control is-valid" name="InputDate" id="davaToday" placeholder="">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="InputNameDoctor" class="col-sm-2 col-form-label">Имя доктора</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control is-valid" name="InputNameDoctor" placeholder="Доктор Хаус">
+    </div>
+  </div>
+  <button type="submit" class="btn btn-report" id="generate-pdf1">Сформировать отчет</button>
+        </div>
+<!--
+
+      <div class="form-group row">
+        <label for="InputId" class="col-sm-2 col-form-label">ID*</label>
+        <input type="text" name="InputId" class="form-control" value="ID">
       </div>
 
       <div class="form-group">
-        <label for="InputSurname">Фамилия*</label>
-        <input type="text" name="InputSurname" class="form-control" id="" aria-describedby="" placeholder="" value="Иванов">
+        <label for="InputSurname" class="col-sm-2 col-form-label">Фамилия*</label>
+        <div class="col-sm-10">
+        <input type="text" name="InputSurname" class="form-control" value="Иванов">
+      </div>
       </div>
 
       <div class="form-group">
         <label for="InputFirstName">Имя*</label>
-        <input type="text" name="InputFirstName" class="form-control" id="" aria-describedby="" placeholder="" value="Иван">
+        <input type="text" name="InputFirstName" class="form-control" value="Иван">
       </div>
 
       <div class="form-group">
         <label for="InputSecondName">Отчество*</label>
-        <input type="text" name="InputSecondName" class="form-control" id="" aria-describedby="" placeholder="" value="Иванович">
+        <input type="text" name="InputSecondName" class="form-control" value="Иванович">
       </div>
 
       <div class="form-group">
         <label for="InputBirth">Дата рождения*</label>
-        <input type="text" name="InputBirth" class="form-control" id="" aria-describedby="" placeholder="" value="01/01/1980">
+        <input type="date" name="InputBirth" class="form-control" value="01/01/1980">
       </div>
 
       <div class="form-group">
         <label for="InputHeight">Рост (см)*</label>
-        <input type="text" name="InputHeight" class="form-control" id="" aria-describedby="" placeholder="" value="180">
+        <input type="text" name="InputHeight" class="form-control" value="180">
       </div>
 
       <div class="form-group">
         <label for="InputWeight">Вес (кг)*</label>
-        <input type="text" name="InputWeight" class="form-control" id="" aria-describedby="" placeholder="" value="80">
+        <input type="text" name="InputWeight" class="form-control" value="80">
       </div>
 
       <div class="form-group">
         <label for="InputSex">Пол (м/ж)*</label>
-        <input type="text" name="InputSex" class="form-control" id="" aria-describedby="" placeholder="" value="м">
+        <input type="text" name="InputSex" class="form-control" value="м">
       </div>
 
+<div class="form-group">
+    <label for="InputSex">Пол (муж/жен)*</label>
+    <select class="form-control" name="InputSex">
+    <option selected>Выберите пол</option>
+      <option>муж</option>
+      <option>жен</option>
+    </select>
+  </div>
       <div class="form-group">
         <label for="InputRase">Раса*</label>
-        <input type="text" name="InputRase" class="form-control" id="" aria-describedby="" placeholder="" value="Европеоид">
+        <input type="text" name="InputRase" class="form-control" value="Европеоид">
       </div>
 
       <div class="form-group">
         <label for="InputDate">Дата*</label>
-        <input type="date" name="InputDate" class="form-control" id="davaToday" aria-describedby="" placeholder="" value="">
+        <input type="date" name="InputDate" class="form-control" id="davaToday" value="">
       </div>
       
       <div class="form-group">
         <label for="InputNameDoctor">Имя доктора</label>
-        <input type="text" name="InputNameDoctor" class="form-control" id="" aria-describedby=""
-          placeholder="" value="Застрожин Михаил Сергеевич, к.м.н.,
+        <input type="text" name="InputNameDoctor" class="form-control" value="Застрожин Михаил Сергеевич, к.м.н.,
 руководитель лаборатории генетики МНПЦ наркологии ДЗМ">
       </div>
     </div>
+    -->
+
+   <!-- <input type="submit" value="Сформировать отчет" id="generate-pdf1">-->
   </section>
   
   <?php 
   $CurrentDate = date('j/m/Y');
   ?>
-
-  <br><br>
-  <!-- шаг 4 -сформировать отчет -->
-
-  <section class="" id="">
-    <div class="container">
-      <!--<h2>/Шаг 4</h2>
-      <h3>Generation of Report</h3>-->
-      <br>
-<!--
-     <a href="#" class="btn btn-dark btn-lg btn-block" role="button"
-        style="background-color: #4B7872; color: #FFFFFF; border: solid 1px #4B7872;">Сформировать
-        отчет</a>
-        --> 
-
-        <input type="submit" value="Сформировать отчет" id="generate-pdf1">
-        <br>
-      
-    </div>
-  </section>
   </form>
 
   <!--  -->
@@ -259,10 +342,10 @@ document.getElementById('davaToday').valueAsDate = new Date();
       }
     });
   </script>
-
   <!--  конец формы -->
 
   <!-- JS -->
+  <script type="module" src="js/app.js" async="true"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
     integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -273,9 +356,5 @@ document.getElementById('davaToday').valueAsDate = new Date();
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.2/jspdf.plugin.autotable.min.js"></script> -->
   <!--<script src="js/form.js"></script>-->
-  
-  <script type="module" src="js/app.js" async></script>
-
 </body>
-
 </html>
