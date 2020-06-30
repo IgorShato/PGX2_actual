@@ -44,11 +44,11 @@
         <table id="table-'.$i.'">
           <thead>
             <tr>
-              <td class="td_head">Nucleotide Change</td>
-              <td class="td_head">Allele Variant</td>
+              <td class="td_head">Нуклеотидная замена</td>
+              <td class="td_head">Аллельный вариант</td>
               <td class="td_head">rs</td>
-              <td class="td_head">Genotype</td>
-              <td class="td_head">Include in Report</td>
+              <td class="td_head">Генотип</td>
+              <td class="td_head">Включить в отчет</td>
             </tr>
           </thead>
           <tbody>';
@@ -89,7 +89,7 @@
     $output = '';
 
     foreach ($data as $key => $value){
-      $statement = $pdo->prepare("SELECT Group_Name_ru FROM spec WHERE Specialization = :specialuzation GROUP BY Group_Name_ru");
+      $statement = $pdo->prepare("SELECT Group_Name_ru FROM spec WHERE Specialization = :specialuzation GROUP BY Group_Name_ru ORDER BY Specialization");
       $statement->bindValue(':specialuzation', $value);
       $statement->execute();
       $rezult_drugGroups = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -107,13 +107,13 @@
             </div>
             <div class="modal-body">
               <div class="accordion" id="accordionExample">';
-
+      
       foreach ($rezult_drugGroups as $key1 => $value1){
-        $statement = $pdo->prepare("SELECT Subgroup_Name_ru FROM spec WHERE Group_Name_ru = :group_name GROUP BY Subgroup_Name_ru");
+        $statement = $pdo->prepare("SELECT Subgroup_Name_ru FROM spec WHERE Group_Name_ru = :group_name GROUP BY Subgroup_Name_ru ORDER BY Group_Name_ru");
         $statement->bindValue(':group_name', $value1['Group_Name_ru']);
         $statement->execute();
         $rezult_drugSubgroups = $statement->fetchAll(PDO::FETCH_ASSOC);
-
+        
         $output .= '
           <div class="card" data-id="card'.($key1 + 1).'">
             <div class="card-header" id="headingOne">
@@ -130,9 +130,9 @@
               data-parent="#accordionExample">
               <div class="card-body">
 ';
-
-        foreach ($rezult_drugSubgroups as $key2 => $value2){
-          $statement = $pdo->prepare("SELECT ID, Drug_Name_ru, Primary_Enzyme_1, Primary_Enzyme_2, Secondary_Enzyme_1, Secondary_Enzyme_2, Secondary_Enzyme_3, Pharmacodynamic_Gene FROM general_data WHERE Subgroup_Name_ru = :subgroup_name");
+         
+         foreach ($rezult_drugSubgroups as $key2 => $value2){
+          $statement = $pdo->prepare("SELECT ID, Drug_Name_ru, Primary_Enzyme_1, Primary_Enzyme_2, Secondary_Enzyme_1, Secondary_Enzyme_2, Secondary_Enzyme_3, Pharmacodynamic_Gene FROM spec WHERE Subgroup_Name_ru = :subgroup_name");
           $statement->bindValue(':subgroup_name', $value2['Subgroup_Name_ru']);
           $statement->execute();
           $rezult_drugName = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -141,7 +141,7 @@
                 <input type="checkbox" name="" id="checkbox" class="panel-collapse" data-collapse="true" data-collapse-target-panel="'.$key2.'">
                 <button class="accordion" data-id="acc'.($key2 + 1).'" data-parent="card'.($key1 + 1).'">'.$value2['Subgroup_Name_ru'].'</button>
                 <div class="panel" panel-id="'.$key2.'" data-parent="acc'.($key2 + 1).'">';
-
+                
           foreach ($rezult_drugName as $key3 => $value3){
             $arr = array($value3['Primary_Enzyme_1'], $value3['Primary_Enzyme_2'], $value3['Secondary_Enzyme_1'], $value3['Secondary_Enzyme_2'], $value3['Secondary_Enzyme_3']);
             $arr = array_filter($arr);
