@@ -23,14 +23,22 @@
   <section class="section">
     <br>
     <div class="container">
-      <h2 style="text-align: center;">Внесите результаты генотипирования</h2><br>
+      <fieldset>
+        <legend>
+      <h2 style="text-align: center;">Внесите результаты генотипирования</h2>
+      <legend>
+</fieldset>
 </div>
-      <!-- выбираем направление  -->
 
-<div class="container">
-      <div class="row">
-        <div class="col-3">
-          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+      <!-- выбираем направление  -->
+      <div class="container container-main">
+      <div class="container container-change">
+      <!--<div class="row">
+        <div class="col-3">-->
+          <!--<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">-->
+          <div class="nav nav-pills" id="nav-tab" role="tablist">
+          <button type="button" class="nav-link-dis" id="v-pills-home-tab">Все</button>
+
             <?php
                   $statement = $pdo->prepare("SELECT * FROM category");
                   $statement->execute();
@@ -38,58 +46,59 @@
                   
                   foreach($data as $key => $value):
                      ?>
-            <a class="nav-link <?php if ($key == 0){echo 'active';} ?>" id="v-pills-home-tab" data-toggle="pill"
+              
+            <a class="nav-link  <?php if ($key == 0){echo 'active';} ?>" id="v-pills-home-tab" data-toggle="pill"
               href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"
               data-category-id="<?php echo $value['idCategory']; ?>"><?php echo $value['name']; ?>
-              &rarr;</a>
-            <?php endforeach; ?>
-          </div>
+              </a>
+            <?php endforeach; ?> <button type="button" class="nav-link-dis" id="v-pills-home-tab">Фармакодинамика</button>
+                  </div>
         </div>
-
+                  
         <!-- выбираем маркер -->
+        <div class="container container-marker">
         <div class="col-6">
           <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
               <div class="row">
                 <div class="col-4 list-group__container">
                 </div>
-                <div class="col-8">
+               <div class="col-8">
                   <div class="tab-content" id="nav-tabContent">
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div><br>
-      <!-- 
-      <button type="button" class="btn btn-outline-secondary" href="#">&larr; Назад</button>
-      <button type="button" class="btn btn-outline-success" href="#">Дальше &rarr;</button>
-      -->
+        </div> 
+      </div>
+                  </div><!-- -->   
+      <br>
+                         
     </div>
     </div>
 
     </div>
     </div>
                   </div>     
-    </div><br>
+    </div>
+                  </div> <!-- -->   
+    <br>
+    
   </section>
 
   <!-- Шаг 2 -->
   <section class="section">
     <div class="container">
-      <h2>Выберите лекарства, которые необходимо включить в отчет</h2>
+    <fieldset>
+        <legend>
+      <h2 style="text-align: center;">Выберите лекарства, которые необходимо включить в отчет</h2>
+      <legend>
+</fieldset>
+                  </div>
     <br>
       
-        <style>
-        .someclass {
-          background-color: #4B7872;
-          color: #FFFFFF;
-          width: 240px;
-          margin: 5px 10px 5px 1px;
-        }
-      </style>
-      
+      <div class="container">
       <!-- кнопка -->
       <input class="checkbox__modal" type="checkbox" name="psychiatry">
       <button type="button" class="btn someclass" data-toggle="modal" data-target="#psychiatry" data-specialization-name="psychiatry"> PSYCHIATRY
@@ -119,7 +128,7 @@
       <input class="checkbox__modal" type="checkbox" name="oncology">
       <button type="button" class="btn someclass" data-toggle="modal" data-target="#oncology" data-specialization-name="oncology"> ONCOLOGY
       </button>
-
+      </div>
       <!-- окно -->
       <?php 
         $statement = $pdo->prepare("SELECT * FROM category");
@@ -150,7 +159,7 @@
         </fieldset>
 
       <!-- данные пациента - поля -->
-      <div class="container container-form">
+      <div class="container container-date-patient">
   <div class="form-group row">
     <label for="InputId" class="col-sm-2 col-form-label">ID</label>
     <div class="col-sm-10">
