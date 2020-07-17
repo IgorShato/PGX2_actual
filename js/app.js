@@ -1,4 +1,9 @@
 /**
+ * Version 1.0.01
+ */
+
+
+/**
  * Import
  */
 
@@ -31,7 +36,7 @@ $(document).ready(function(){
 
   // load all genes
   AjaxQ.loadData('loadCategories', getPillsCategories());
-
+  
   // get all genes
   let getGenesData = () => {
     return Array.from(document.getElementsByClassName('list-group-item')).map((item) => {
@@ -48,14 +53,14 @@ $(document).ready(function(){
       }else{
         $('.tab-pane[data-category-name="'+ curCategory +'"]').addClass('active');
       }
-    }, 150);
+    }, 250);
   }
 
   // load all gene data and display active gene data
   setTimeout(() => {
     AjaxQ.loadData('loadTable', getGenesData()); 
     displayTable($('.list-group.active').find('.list-group-item.active').text());
-  }, 50)
+  }, 500)
 
   // gene categorie click event
   $(document).on('click', '.nav-link',  function(e){
@@ -89,38 +94,42 @@ $(document).ready(function(){
   // load drug pops data
   AjaxQ.loadData('loadPops', getAllDrugGroups());
 
+  $(document).on('click', 'button.someclass', (e) => {
+    if ($(e.target)[0].localName != 'input'){
+      let catName = $(e.target)[0].dataset.specializationName.toLowerCase();
+      let catData = $('.group-item[data-cat-name="'+ catName +'"]');
+
+      $('.group-item.active').toggleClass('active');
+      catData.toggleClass('active');
+    }
+  })
+
   /**
    * Checkbox click events
    */
 
-  $(document).on('change', 'input[type="checkbox"][data-collapse="true"]',  function(e) {
+  $(document).on('change', '.group-item.active .group_name input[type="checkbox"]',  function(e) {
     e.preventDefault();
 
-    let inputsContainer = $(e.target).closest('.card').find('#' + $(e.target).data('collapse-target'));
-
-    $.each($(inputsContainer).find('input[type="checkbox"]'), function (indexInArray, valueOfElement) { 
+    let label = $(e.target).next('label').attr("for", $(e.target)[0].id); 
+    let inputsContainer = $('.group-item.active .supgroup_name').find('input[data-group-name="'+label[0].innerText + '"]');
+    console.log(label)
+    $.each($(inputsContainer), function (indexInArray, valueOfElement) { 
       if ($(e.target).prop('checked')){
-        if ($(valueOfElement).hasClass('drug-checkbox')){
-          $(valueOfElement).prop('checked', true).change();
-        }else{
-          $(valueOfElement).prop('checked', true);
-        }
+        $(valueOfElement).prop('checked', true).change();
       }else{
-        if ($(valueOfElement).hasClass('drug-checkbox')){
-          $(valueOfElement).prop('checked', false).change();
-        }else{
-          $(valueOfElement).prop('checked', false);
-        }
+        $(valueOfElement).prop('checked', false).change();
       }
     });
   })
 
-  $(document).on('change', 'input[type="checkbox"][data-collapse="true"].panel-collapse',  function(e) {
+  $(document).on('change', '.group-item.active .supgroup_name input[type="checkbox"]',  function(e) {
     e.preventDefault();
 
-    let panelContainer = $(e.target).closest('.card-body').find('[panel-id='+$(e.target).data('collapse-target-panel')+']');
-
-    $.each($(panelContainer).find('input[type="checkbox"]'), function (indexInArray, valueOfElement) { 
+    let label = $(e.target).next('label').attr("for", $(e.target)[0].id); 
+    let inputsContainer = $('.group-item.active .drugs_name').find('input[data-subgroup-id="' + label[0].htmlFor + '"]');
+    // console.log(label);
+    $.each($(inputsContainer), function (indexInArray, valueOfElement) { 
       if ($(e.target).prop('checked')){
         if ($(valueOfElement).hasClass('drug-checkbox')){
           $(valueOfElement).prop('checked', true).change();
@@ -140,12 +149,15 @@ $(document).ready(function(){
   $(document).on('change', '.checkbox__modal',  function(e) {
     e.preventDefault();
     
-    let modal = $('#' + $(e.target).attr('name'));
-    
-    $.each(modal.find('input[type="checkbox"]'), function (indexInArray, valueOfElement) { 
+    let groupItem = $('.group-item[data-cat-name="'+ $(e.target)[0].name +'"]');
+
+    $.each(groupItem.find('.group_name input[type="checkbox"]'), function (indexInArray, valueOfElement) { 
+      console.log(event);
       if ($(e.target).prop('checked')){
+        console.log('Event add')
         $(valueOfElement).prop('checked', true).change();
       }else{
+        console.log('Event delete')
         $(valueOfElement).prop('checked', false).change();
       }
     });
@@ -193,6 +205,41 @@ $(document).ready(function(){
     }
     console.log(columns);
   });
+
+  $(document).on('change', '.select', (e) => {
+    if (columns.length > 0){
+      let rs = $(e.target).closest('tr')[0].cells[2].innerText;
+      let newGenotype = $(e.target).val();
+      let activityValue = 0;
+      let activityIndex = $(e.target).find(":selected").index();
+      let kPol = $(e.target).attr('k-pol');
+
+      if (activityIndex == 1){
+        activityValue = 25 * kPol;
+      }else if (activityIndex == 2){
+        activityValue = 50 * kPol;
+      }
+
+      let arrIndex = findRs(rs);
+
+      if (arrIndex != undefined){
+        columns[arrIndex][4] = newGenotype;
+        columns[arrIndex][5] = formKPolSum(activityValue);
+
+        console.log(columns);
+      }
+    }   
+  })
+
+  let findRs = (rs) => {
+    for (let i = 0; i < columns.length; i++){
+      if (columns[i][3] == rs){
+        return i;
+        break;
+      }
+    }
+    return undefined;
+  }
 
   let kPolSumArr = new Array();
 
@@ -344,8 +391,8 @@ $(document).ready(function(){
   $(document).on('change', '.drug-checkbox',  function(e) {
     let drug = $('label[for="'+$(e.target).attr("name")+'"]')[0];
     let drugName = $('label[for="'+$(e.target).attr("name")+'"]')[0].innerText;
-    let drugCategory = $(e.target).closest('.card-body').find('button[data-id="'+$(e.target).closest('.panel').data('parent')+'"]')[0];
-    let drugGroup = $(e.target).closest('div[data-id="'+drugCategory.dataset.parent+'"').find('button[data-toggle]')[0];
+    let drugCategory = $(e.target)[0].dataset.subgroupName;
+    let drugGroup= $('#' + $('.subgroup-item[for="'+ $(e.target)[0].dataset.subgroupId +'"]')[0].htmlFor)[0].dataset.groupName;
     let drugEnzyme = $(drug).data('enzyme').split(',');
     let drugPharmGene = () => {
       if ($('label[for="'+$(e.target).attr("name")+'"]')[0].dataset.pharmacodynamicGene){
@@ -354,12 +401,12 @@ $(document).ready(function(){
         return '&mdash;'
       }  
     }
-
+    console.log(drugGroup);
     if (e.target.checked){
-      let groupIndex = findDrugGroup(drugGroup.innerText);
+      let groupIndex = findDrugGroup(drugGroup);
       if (groupIndex != undefined){
   
-        let catIndex = findDrugCat(groupIndex, drugCategory.innerText);
+        let catIndex = findDrugCat(groupIndex, drugCategory);
         if (catIndex != undefined){
   
           let drugIndex = findDrug(groupIndex, catIndex, drugName);
@@ -368,20 +415,20 @@ $(document).ready(function(){
               name: drugName,
               geneSum: getDrugKPolSum(drug),
               pharmGene: drugPharmGene(),
-              enzyme: drugEnzyme.join(' '),
+              enzyme: drugEnzyme.join(),
               fcAction: formAction(drugEnzyme),
               fdAction: formAction($('label[for="'+$(e.target).attr("name")+'"]')[0].dataset.pharmacodynamicGene)
             })
           }
         }else{
           drugsArr[groupIndex].categories.push({
-            catName: drugCategory.innerText,
+            catName: drugCategory,
             drugs: [
               {
                 name: drugName,
                 geneSum: getDrugKPolSum(drug),
                 pharmGene: drugPharmGene(),
-                enzyme: drugEnzyme.join(' '),
+                enzyme: drugEnzyme.join(),
                 fcAction: formAction(drugEnzyme),
                 fdAction: formAction($('label[for="'+$(e.target).attr("name")+'"]')[0].dataset.pharmacodynamicGene)
               }
@@ -391,16 +438,16 @@ $(document).ready(function(){
       }else{
         drugsArr.push(
           {
-            drugGroup: drugGroup.innerText,
+            drugGroup: drugGroup,
             categories: [
               {
-                catName: drugCategory.innerText,
+                catName: drugCategory,
                 drugs: [
                   {
                     name: drugName,
                     geneSum: getDrugKPolSum(drug),
                     pharmGene: drugPharmGene(),
-                    enzyme: drugEnzyme.join(' '),
+                    enzyme: drugEnzyme.join(),
                     fcAction: formAction(drugEnzyme),
                     fdAction: formAction($('label[for="'+$(e.target).attr("name")+'"]')[0].dataset.pharmacodynamicGene)
                   }
@@ -411,15 +458,15 @@ $(document).ready(function(){
         )
       }
     }else{
-      console.log('delete');
-      let groupIndex = findDrugGroup(drugGroup.innerText);
-      console.log(groupIndex);
+      console.log($(e.target))
+      let groupIndex = findDrugGroup(drugGroup);
+
       if (groupIndex != undefined){
-        console.log('delete2');
-        let catIndex = findDrugCat(groupIndex, drugCategory.innerText);
+        let catIndex = findDrugCat(groupIndex, drugCategory);
+        
         if (catIndex != undefined){
-          console.log('delete3');
           let drugIndex = findDrug(groupIndex, catIndex, drugName);
+
           if (drugIndex != undefined){
             if (drugsArr[groupIndex].categories[catIndex].drugs.length <= 1){
               drugsArr[groupIndex].categories.splice(catIndex, 1);
@@ -430,6 +477,7 @@ $(document).ready(function(){
         }
       }
 
+      console.log(drugsArr[groupIndex]);
       if (drugsArr[groupIndex].categories.length == 0){
         drugsArr.splice(groupIndex, 1);
       }
