@@ -84,12 +84,13 @@
     }
 
     echo json_encode(array('type' => 'tableData', 'data' => $output));
-  } else if ($action == 'loadPops') {
+  } else if ($action == 'loadPops_old') {
     $data = $_POST['data'];
     $output = '';
+    // $outputArr = new array
 
     foreach ($data as $key => $value){
-      $statement = $pdo->prepare("SELECT Group_Name_ru FROM spec WHERE Specialization = :specialuzation GROUP BY Group_Name_ru ORDER BY Specialization");
+      $statement = $pdo->prepare("SELECT Group_Name_ru FROM spec WHERE Specialization = :specialuzation GROUP BY Group_Name_ru");
       $statement->bindValue(':specialuzation', $value);
       $statement->execute();
       $rezult_drugGroups = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -107,13 +108,13 @@
             </div>
             <div class="modal-body">
               <div class="accordion" id="accordionExample">';
-      
+
       foreach ($rezult_drugGroups as $key1 => $value1){
-        $statement = $pdo->prepare("SELECT Subgroup_Name_ru FROM spec WHERE Group_Name_ru = :group_name GROUP BY Subgroup_Name_ru ORDER BY Group_Name_ru");
+        $statement = $pdo->prepare("SELECT Subgroup_Name_ru FROM spec WHERE Group_Name_ru = :group_name GROUP BY Subgroup_Name_ru");
         $statement->bindValue(':group_name', $value1['Group_Name_ru']);
         $statement->execute();
         $rezult_drugSubgroups = $statement->fetchAll(PDO::FETCH_ASSOC);
-        
+
         $output .= '
           <div class="card" data-id="card'.($key1 + 1).'">
             <div class="card-header" id="headingOne">
@@ -129,10 +130,10 @@
             <div id="collapse'.($key1 + 1).'" class="collapse" aria-labelledby="headingOne"
               data-parent="#accordionExample">
               <div class="card-body">
-';
-         
-         foreach ($rezult_drugSubgroups as $key2 => $value2){
-          $statement = $pdo->prepare("SELECT ID, Drug_Name_ru, Primary_Enzyme_1, Primary_Enzyme_2, Secondary_Enzyme_1, Secondary_Enzyme_2, Secondary_Enzyme_3, Pharmacodynamic_Gene FROM spec WHERE Subgroup_Name_ru = :subgroup_name");
+        ';
+
+        foreach ($rezult_drugSubgroups as $key2 => $value2){
+          $statement = $pdo->prepare("SELECT ID, Drug_Name_ru, Primary_Enzyme_1, Primary_Enzyme_2, Secondary_Enzyme_1, Secondary_Enzyme_2, Secondary_Enzyme_3, Pharmacodynamic_Gene FROM general_data WHERE Subgroup_Name_ru = :subgroup_name");
           $statement->bindValue(':subgroup_name', $value2['Subgroup_Name_ru']);
           $statement->execute();
           $rezult_drugName = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -141,7 +142,7 @@
                 <input type="checkbox" name="" id="checkbox" class="panel-collapse" data-collapse="true" data-collapse-target-panel="'.$key2.'">
                 <button class="accordion" data-id="acc'.($key2 + 1).'" data-parent="card'.($key1 + 1).'">'.$value2['Subgroup_Name_ru'].'</button>
                 <div class="panel" panel-id="'.$key2.'" data-parent="acc'.($key2 + 1).'">';
-                
+
           foreach ($rezult_drugName as $key3 => $value3){
             $arr = array($value3['Primary_Enzyme_1'], $value3['Primary_Enzyme_2'], $value3['Secondary_Enzyme_1'], $value3['Secondary_Enzyme_2'], $value3['Secondary_Enzyme_3']);
             $arr = array_filter($arr);
@@ -170,4 +171,81 @@
     }
 
     echo json_encode(array('type' => 'popsData', 'data' => $output));
+  } else if ($action == 'loadPops'){
+    $data = $_POST['data'];
+    $outputGroups = '';
+    $outputSubGroups = '';
+    $outputDrugs = '';
+    $rezOutput = '';
+
+    foreach ($data as $key => $value){
+      $statement = $pdo->prepare("SELECT Group_Name_ru FROM spec WHERE Specialization = :specialuzation GROUP BY Group_Name_ru");
+      $statement->bindValue(':specialuzation', $value);
+      $statement->execute();
+      $rezult_drugGroups = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+      foreach ($rezult_drugGroups as $key1 => $value1){
+        $statement = $pdo->prepare("SELECT ID, Subgroup_Name_ru FROM spec WHERE Group_Name_ru = :group_name GROUP BY Subgroup_Name_ru");
+        $statement->bindValue(':group_name', $value1['Group_Name_ru']);
+        $statement->execute();
+        $rezult_drugSubgroups = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        $outputGroups .= '
+          <div>
+          <input id="cg-'.$key1.'" type="checkbox"> 
+          <label for="cg-'.$key1.'">'.$value1['Group_Name_ru'].'</label> <br>
+          </div>
+        ';
+
+        foreach ($rezult_drugSubgroups as $key2 => $value2){
+          $statement = $pdo->prepare("SELECT ID, Drug_Name_ru, Primary_Enzyme_1, Primary_Enzyme_2, Secondary_Enzyme_1, Secondary_Enzyme_2, Secondary_Enzyme_3, Pharmacodynamic_Gene FROM general_data WHERE Subgroup_Name_ru = :subgroup_name GROUP BY Drug_Name_ru");
+          $statement->bindValue(':subgroup_name', $value2['Subgroup_Name_ru']);
+          $statement->execute();
+          $rezult_drugName = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+          $outputSubGroups .= '
+            <div>
+            <input id="sg-'.$value2['ID'].'" type="checkbox" data-group-name="'.$value1['Group_Name_ru'].'">
+            <label for="sg-'.$value2['ID'].'" class="subgroup-item" data-subgroup-id="'.$value2['Subgroup_Name_ru'].'">'.$value2['Subgroup_Name_ru'].'</label> <br>
+            </div>
+          ';
+
+          foreach ($rezult_drugName as $key3 => $value3){
+            $arr = array($value3['Primary_Enzyme_1'], $value3['Primary_Enzyme_2'], $value3['Secondary_Enzyme_1'], $value3['Secondary_Enzyme_2'], $value3['Secondary_Enzyme_3']);
+            $arr = array_filter($arr);
+
+            $outputDrugs .= '
+                <div>
+                <input type="checkbox" id="'.$value3['ID'].'" name="'.$value3['ID'].'" class="drug-checkbox" data-subgroup-name="'.$value2['Subgroup_Name_ru'].'" data-subgroup-id="sg-'.$value2['ID'].'"/>
+                <label for="'.$value3['ID'].'" data-enzyme="'.implode(',', $arr).'" data-pharmacodynamic-gene="'.$value3['Pharmacodynamic_Gene'].'">'.$value3['Drug_Name_ru'].'</label> <br>
+                </div>
+            ';
+          }
+        }
+      }
+
+      if ($outputDrugs != ''){
+        $rezOutput .= '
+          <div class="group-item row '.($key == 0 ? 'active' : '').'" data-cat-name="'.$value.'">
+            <div class="col group_name"> 
+              '.$outputGroups.'
+            </div>
+
+            <div class="col supgroup_name"> 
+            '.$outputSubGroups.'
+            </div>
+
+            <div class="col drugs_name"> 
+              '.$outputDrugs.'
+            </div>
+          </div>
+        ';
+
+        $outputGroups = '';
+        $outputSubGroups = '';
+        $outputDrugs = '';
+      }
+    }
+
+    echo json_encode(array('type' => 'popsData', 'data' => $rezOutput));
   }
