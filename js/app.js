@@ -543,5 +543,10 @@ $(document).ready(function(){
       }
     }); 
   });
+  
+   $('.list').on('click', '#flag', function(){
+    $('.list #flag').removeClass('active');
+    $(this).addClass('active');
+}); 
 }); 
 
