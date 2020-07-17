@@ -121,48 +121,49 @@
           <div class="container container-main">
         <div class="row">
           <div class="col-3 specialization_name">
+          <div class="list">
             <!-- кнопка -->
             <!--<input class="checkbox__modal" type="checkbox" name="psychiatry">-->
-            <button type="button" class="btn someclass" data-toggle="modal" data-target="#psychiatry"
+            <button type="button" id="flag" class="btn someclass" data-toggle="modal" data-target="#psychiatry"
               data-specialization-name="psychiatry">ПСИХИАТРИЯ<label class="switch"><input class="checkbox__modal" id="checbox" type="checkbox" name="psychiatry"><span class="slider round"></span></label>
             </button>
             <!--<input class="checkbox__modal" type="checkbox" name="neurology">-->
-            <button type="button" class="btn someclass" data-toggle="modal" data-target="#neurology"
+            <button type="button" id="flag" class="btn someclass" data-toggle="modal" data-target="#neurology"
               data-specialization-name="neurology">НЕВРОЛОГИЯ<label class="switch"><input class="checkbox__modal" type="checkbox" name="neurology"><span class="slider round"></span></label> 
             </button>
             <!--<input class="checkbox__modal" type="checkbox" name="cardiology">-->
-            <button type="button" class="btn someclass" data-toggle="modal" data-target="#cardiology"
+            <button type="button" id="flag" class="btn someclass" data-toggle="modal" data-target="#cardiology"
               data-specialization-name="cardiology">КАРДИОЛОГИЯ<label class="switch"><input class="checkbox__modal" type="checkbox" name="cardiology"><span class="slider round"></span></label>
             </button>
             <!--<input class="checkbox__modal" type="checkbox" name="allergology">-->
-            <button type="button" class="btn someclass" data-toggle="modal" data-target="#allergology"
+            <button type="button" id="flag" class="btn someclass" data-toggle="modal" data-target="#allergology"
               data-specialization-name="allergology">АЛЛЕРГОЛОГИЯ<label class="switch"><input class="checkbox__modal" type="checkbox" name="allergology"><span class="slider round"></span></label>
             </button>
             <!--<input class="checkbox__modal" type="checkbox" name="gastroenterology">-->
-            <button type="button" class="btn someclass" data-toggle="modal" data-target="#gastroenterology"
+            <button type="button" id="flag" class="btn someclass" data-toggle="modal" data-target="#gastroenterology"
               data-specialization-name="gastroenterology">
              ГАСТРОЭНТЕРОЛОГИЯ<label class="switch"><input class="checkbox__modal" type="checkbox" name="gastroenterology"><span class="slider round"></span></label>
             </button>
             <!--<input class="checkbox__modal" type="checkbox" name="endocrinology">-->
-            <button type="button" class="btn someclass" data-toggle="modal" data-target="#endocrinology"
+            <button type="button" id="flag" class="btn someclass" data-toggle="modal" data-target="#endocrinology"
               data-specialization-name="endocrinology">ЭНДОКРИНОЛОГИЯ<label class="switch"><input class="checkbox__modal" type="checkbox" name="endocrinology"><span class="slider round"></span></label>
             </button>
             <!--<input class="checkbox__modal" type="checkbox" name="dermatology">-->
-            <button type="button" class="btn someclass" data-toggle="modal" data-target="#dermatology"
+            <button type="button" id="flag" class="btn someclass" data-toggle="modal" data-target="#dermatology"
               data-specialization-name="dermatology">ДЕРМАТОЛОГИЯ<label class="switch"><input class="checkbox__modal" type="checkbox" name="dermatology"><span class="slider round"></span></label>
             </button>
             <!--<input class="checkbox__modal" type="checkbox" name="infections">-->
-            <button type="button" class="btn someclass" data-toggle="modal" data-target="#infections"
+            <button type="button" id="flag" class="btn someclass" data-toggle="modal" data-target="#infections"
               data-specialization-name="infections">ИНФЕКЦИИ<label class="switch"><input class="checkbox__modal" type="checkbox" name="infections"><span class="slider round"></span></label>
             </button>
             <!--<input class="checkbox__modal" type="checkbox" name="oncology">-->
-            <button type="button" class="btn someclass" data-toggle="modal" data-target="#oncology"
+            <button type="button" id="flag" class="btn someclass" data-toggle="modal" data-target="#oncology"
               data-specialization-name="oncology">ОНКОЛОГИЯ<label class="switch" type="checkbox"><input class="checkbox__modal" type="checkbox" name="oncology"><span class="slider round"></span></label>
             </button>
-            <button type="button" class="btn someclass" data-toggle="modal" data-target="#covid19"
+            <button type="button" id="flag" class="btn someclass" data-toggle="modal" data-target="#covid19"
               data-specialization-name="covid19">COVID19<label class="switch"><input class="checkbox__modal" type="checkbox" name="covid19"><span class="slider round"></span></label>
               </button>
-              
+              </div>
           </div>
           
           <div class="step2-groups col">
@@ -170,6 +171,11 @@
           </div>
         </div>
 
+<style>
+#flag { cursor: pointer; }
+#flag.active {background: gray; color: #FFFFFF; border: solid 1px gray;}
+  </style>
+            
       <!-- окно -->
       <?php 
        $statement = $pdo->prepare("SELECT * FROM category");
