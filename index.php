@@ -17,27 +17,28 @@
   <?php include './config.php'; ?>
   <!-- форма -->
   <!-- шаг 1 -->
-
+  
   <form action="report.php" method="POST" target="_blank" id="pdf-form">
 
-  <section class="section">
-    <br>
-    <div class="container">
-      <fieldset>
-        <legend>
-      <h2 style="text-align: center;">Внесите результаты генотипирования</h2>
-      <legend>
-</fieldset>
-</div>
+    <section class="tab">
+      <br>
+      <div class="container">
+        <fieldset>
+          <legend>
+            <h2 style="text-align: center;">Внесите результаты генотипирования</h2>
+            <legend>
+        </fieldset>
+      </div>
 
       <!-- выбираем направление  -->
-      <div class="container container-main">
-      <div class="container container-change">
-      <!--<div class="row">
+      <div class="container">
+        <div class="container-change">
+        <!--<div class="container container-main">-->
+          <!--<div class="row">
         <div class="col-3">-->
           <!--<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">-->
           <div class="nav nav-pills" id="nav-tab" role="tablist">
-          <button type="button" class="nav-link-dis" id="v-pills-home-tab">Все</button>
+            <button type="button" class="nav-link-dis" id="v-pills-home-tab">Все</button>
 
             <?php
                   $statement = $pdo->prepare("SELECT * FROM category");
@@ -46,92 +47,132 @@
                   
                   foreach($data as $key => $value):
                      ?>
-              
+
             <a class="nav-link  <?php if ($key == 0){echo 'active';} ?>" id="v-pills-home-tab" data-toggle="pill"
               href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true"
               data-category-id="<?php echo $value['idCategory']; ?>"><?php echo $value['name']; ?>
-              </a>
-            <?php endforeach; ?> <button type="button" class="nav-link-dis" id="v-pills-home-tab">Фармакодинамика</button>
-                  </div>
+            </a>
+            <?php endforeach; ?> <button type="button" class="nav-link-dis"
+              id="v-pills-home-tab">Фармакодинамика</button>
+          </div>
         </div>
-                  
+                  </div>
+        <div class="container">
+        <div class="container-main">
         <!-- выбираем маркер -->
         <div class="container container-marker">
-        <div class="col-6">
-          <div class="tab-content" id="v-pills-tabContent">
-            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-              <div class="row">
-                <div class="col-4 list-group__container">
+          <div class="col-6">
+            <div class="tab-content" id="v-pills-tabContent">
+              <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                aria-labelledby="v-pills-home-tab">
+                <div class="row">
+                  <div class="col-4 list-group__container">
+                  </div>
+                  <div class="col-8">
+                    <div class="tab-content" id="nav-tabContent">
+                    </div>
+                
                 </div>
-               <div class="col-8">
-                  <div class="tab-content" id="nav-tabContent">
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div> 
+        </div>
       </div>
-                  </div><!-- -->   
-      <br>
-                         
-    </div>
-    </div>
 
-    </div>
-    </div>
-                  </div>     
-    </div>
-                  </div> <!-- -->   
-    <br>
-    
-  </section>
+      </div>
+      </div>
 
-  <!-- Шаг 2 -->
-  <section class="section">
-    <div class="container">
-    <fieldset>
-        <legend>
-      <h2 style="text-align: center;">Выберите лекарства, которые необходимо включить в отчет</h2>
-      <legend>
-</fieldset>
+      </div>
+      </div>
+      </div>
+      </div>
+      </div> 
+                 </div>
+       <!-- next and prev -->
+       <div class="container">
+<div class="container container_buttons">
+      <div style="overflow:auto;">
+  <div style="float:right;">
+   <button type="button" id="prevBtn" onclick="nextPrev(-1)">Назад</button>
+    <button type="button" id="nextBtn" onclick="nextPrev(1)">Далее</button>
+  </div>
+</div>
                   </div>
+                  </div>
+                  
+ <!-- -->
+   
+    </section>
+
+    <!-- Шаг 2 -->
     <br>
-      
+    <section class="tab">
       <div class="container">
-      <!-- кнопка -->
-      <input class="checkbox__modal" type="checkbox" name="psychiatry">
-      <button type="button" class="btn someclass" data-toggle="modal" data-target="#psychiatry" data-specialization-name="psychiatry"> PSYCHIATRY
-      </button>
-      <input class="checkbox__modal" type="checkbox" name="neurology">
-      <button type="button" class="btn someclass" data-toggle="modal" data-target="#neurology" data-specialization-name="neurology"> NEUROLOGY
-      </button>
-      <input class="checkbox__modal" type="checkbox" name="cardiology">
-      <button type="button" class="btn someclass" data-toggle="modal" data-target="#cardiology" data-specialization-name="cardiology"> CARDIOLOGY
-      </button><br>
-       <input class="checkbox__modal" type="checkbox" name="allergology">
-      <button type="button" class="btn someclass" data-toggle="modal" data-target="#allergology" data-specialization-name="allergology"> ALLERGOLOGY
-      </button>
-       <input class="checkbox__modal" type="checkbox" name="gastroenterology">
-      <button type="button" class="btn someclass" data-toggle="modal" data-target="#gastroenterology" data-specialization-name="gastroenterology">
-        GASTROENTEROLOGY
-      </button>
-      <input class="checkbox__modal" type="checkbox" name="endocrinology">
-      <button type="button" class="btn someclass" data-toggle="modal" data-target="#endocrinology" data-specialization-name="endocrinology"> ENDOCRINOLOGY
-      </button><br>
-      <input class="checkbox__modal" type="checkbox" name="dermatology">
-      <button type="button" class="btn someclass" data-toggle="modal" data-target="#dermatology" data-specialization-name="dermatology"> DERMATOLOGY
-      </button>
-      <input class="checkbox__modal" type="checkbox" name="infections">
-      <button type="button" class="btn someclass" data-toggle="modal" data-target="#infections" data-specialization-name="infections"> INFECTIONS
-      </button>
-      <input class="checkbox__modal" type="checkbox" name="oncology">
-      <button type="button" class="btn someclass" data-toggle="modal" data-target="#oncology" data-specialization-name="oncology"> ONCOLOGY
-      </button>
+        <fieldset>
+          <legend>
+            <h2 style="text-align: center;">Выберите лекарства, которые необходимо включить в отчет</h2>
+            <legend>
+        </fieldset>
       </div>
+
+      <div class="container">
+          <div class="container container-main">
+        <div class="row">
+          <div class="col-3 specialization_name">
+            <!-- кнопка -->
+            <!--<input class="checkbox__modal" type="checkbox" name="psychiatry">-->
+            <button type="button" class="btn someclass" data-toggle="modal" data-target="#psychiatry"
+              data-specialization-name="psychiatry">ПСИХИАТРИЯ<label class="switch"><input class="checkbox__modal" id="checbox" type="checkbox" name="psychiatry"><span class="slider round"></span></label>
+            </button>
+            <!--<input class="checkbox__modal" type="checkbox" name="neurology">-->
+            <button type="button" class="btn someclass" data-toggle="modal" data-target="#neurology"
+              data-specialization-name="neurology">НЕВРОЛОГИЯ<label class="switch"><input class="checkbox__modal" type="checkbox" name="neurology"><span class="slider round"></span></label> 
+            </button>
+            <!--<input class="checkbox__modal" type="checkbox" name="cardiology">-->
+            <button type="button" class="btn someclass" data-toggle="modal" data-target="#cardiology"
+              data-specialization-name="cardiology">КАРДИОЛОГИЯ<label class="switch"><input class="checkbox__modal" type="checkbox" name="cardiology"><span class="slider round"></span></label>
+            </button>
+            <!--<input class="checkbox__modal" type="checkbox" name="allergology">-->
+            <button type="button" class="btn someclass" data-toggle="modal" data-target="#allergology"
+              data-specialization-name="allergology">АЛЛЕРГОЛОГИЯ<label class="switch"><input class="checkbox__modal" type="checkbox" name="allergology"><span class="slider round"></span></label>
+            </button>
+            <!--<input class="checkbox__modal" type="checkbox" name="gastroenterology">-->
+            <button type="button" class="btn someclass" data-toggle="modal" data-target="#gastroenterology"
+              data-specialization-name="gastroenterology">
+             ГАСТРОЭНТЕРОЛОГИЯ<label class="switch"><input class="checkbox__modal" type="checkbox" name="gastroenterology"><span class="slider round"></span></label>
+            </button>
+            <!--<input class="checkbox__modal" type="checkbox" name="endocrinology">-->
+            <button type="button" class="btn someclass" data-toggle="modal" data-target="#endocrinology"
+              data-specialization-name="endocrinology">ЭНДОКРИНОЛОГИЯ<label class="switch"><input class="checkbox__modal" type="checkbox" name="endocrinology"><span class="slider round"></span></label>
+            </button>
+            <!--<input class="checkbox__modal" type="checkbox" name="dermatology">-->
+            <button type="button" class="btn someclass" data-toggle="modal" data-target="#dermatology"
+              data-specialization-name="dermatology">ДЕРМАТОЛОГИЯ<label class="switch"><input class="checkbox__modal" type="checkbox" name="dermatology"><span class="slider round"></span></label>
+            </button>
+            <!--<input class="checkbox__modal" type="checkbox" name="infections">-->
+            <button type="button" class="btn someclass" data-toggle="modal" data-target="#infections"
+              data-specialization-name="infections">ИНФЕКЦИИ<label class="switch"><input class="checkbox__modal" type="checkbox" name="infections"><span class="slider round"></span></label>
+            </button>
+            <!--<input class="checkbox__modal" type="checkbox" name="oncology">-->
+            <button type="button" class="btn someclass" data-toggle="modal" data-target="#oncology"
+              data-specialization-name="oncology">ОНКОЛОГИЯ<label class="switch" type="checkbox"><input class="checkbox__modal" type="checkbox" name="oncology"><span class="slider round"></span></label>
+            </button>
+            <button type="button" class="btn someclass" data-toggle="modal" data-target="#covid19"
+              data-specialization-name="covid19">COVID19<label class="switch"><input class="checkbox__modal" type="checkbox" name="covid19"><span class="slider round"></span></label>
+              </button>
+              
+          </div>
+          
+          <div class="step2-groups col">
+           
+          </div>
+        </div>
+
       <!-- окно -->
       <?php 
-        $statement = $pdo->prepare("SELECT * FROM category");
+       $statement = $pdo->prepare("SELECT * FROM category");
         $statement->execute();
         $data = $statement->fetchAll(PDO::FETCH_ASSOC);
         
@@ -139,110 +180,134 @@
       ?>
 
       <?php endforeach; ?>
-      <div class="modals">
-          
+      <!--<div class="modals">-->
+
       </div>
+ <!-- next and prev -->
+ <!--<div class="container">-->
+     <div class="container container_buttons">
+      <div style="overflow:auto;">
+  <div style="float:right;">
+    <button type="button" id="prevBtn" onclick="nextPrev(-1)">Назад</button>
+    <button type="button" id="nextBtn" onclick="nextPrev(1)">Далее</button>
+  </div>
+</div>
+                  </div>
+                  </div>
+                  <!--</div>-->
+<!-- -->
       
-        <br><br>
+<br>
+    </section>
+    <!-- шаг 3 -->
 
-  </section>
-  <br><br>
-  <!-- шаг 3 -->
-
-  <section class="section" id="">
-    <div class="container">
-      <fieldset>
-        <legend>
-      <h2 class="text-form" style="text-align: center;">Внесите данные пациента</h2> 
-      <p class="lead" style="text-align: center; color: #FFFFFF; font-size: 16px;">Если данные отсутствуют &mdash; оставьте поле пустым</p>
-        </legend>
+    <section class="tab">
+      <div class="container">
+        <fieldset>
+          <legend>
+            <h2 class="text-form" style="text-align: center;">Внесите данные пациента</h2>
+            <p class="lead" style="text-align: center; color: #FFFFFF; font-size: 14.5px;">Если данные отсутствуют &mdash;
+              оставьте поле пустым</p>
+          </legend>
         </fieldset>
 
-      <!-- данные пациента - поля -->
-      <div class="container container-date-patient">
-  <div class="form-group row">
-    <label for="InputId" class="col-sm-2 col-form-label">ID</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control is-valid" name="InputId" placeholder="Введите ID" autofocus>
-    </div>
-  </div>
+        <!-- данные пациента - поля -->
+        <div class="container container-date-patient">
+          <div class="form-group row">
+            <label for="InputId" class="col-sm-2 col-form-label">ID</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control is-valid" name="InputId" placeholder="Введите ID" autofocus>
+            </div>
+          </div>
 
-  <div class="form-group row">
-    <label for="InputSurname" class="col-sm-2 col-form-label">Фамилия</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control is-valid" name="InputSurname" placeholder="Введите фамилию">
-    </div>
-  </div>
+          <div class="form-group row">
+            <label for="InputSurname" class="col-sm-2 col-form-label">Фамилия</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control is-valid" name="InputSurname" placeholder="Введите фамилию">
+            </div>
+          </div>
 
-  <div class="form-group row">
-    <label for="InputFirstName" class="col-sm-2 col-form-label">Имя</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control is-valid" name="InputFirstName" placeholder="Введите имя">
-    </div>
-  </div>
+          <div class="form-group row">
+            <label for="InputFirstName" class="col-sm-2 col-form-label">Имя</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control is-valid" name="InputFirstName" placeholder="Введите имя">
+            </div>
+          </div>
 
-  <div class="form-group row">
-    <label for="InputSecondName" class="col-sm-2 col-form-label">Отчество</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control is-valid" name="InputSecondName" placeholder="Введите отчество">
-    </div>
-  </div>
+          <div class="form-group row">
+            <label for="InputSecondName" class="col-sm-2 col-form-label">Отчество</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control is-valid" name="InputSecondName" placeholder="Введите отчество">
+            </div>
+          </div>
 
-  <div class="form-group row">
-    <label for="InputBirth" class="col-sm-2 col-form-label">Дата рождения</label>
-    <div class="col-sm-10">
-      <input type="date" class="form-control is-valid" name="InputBirth" placeholder="01.01.1970">
-    </div>
-  </div>
+          <div class="form-group row">
+            <label for="InputBirth" class="col-sm-2 col-form-label">Дата рождения</label>
+            <div class="col-sm-10">
+              <input type="date" class="form-control is-valid" name="InputBirth" placeholder="01.01.1970">
+            </div>
+          </div>
 
-  <div class="form-group row">
-    <label for="InputHeight" class="col-sm-2 col-form-label">Рост</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control is-valid" name="InputHeight" placeholder="Введите рост">
-    </div>
-  </div>
+          <div class="form-group row">
+            <label for="InputHeight" class="col-sm-2 col-form-label">Рост</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control is-valid" name="InputHeight" placeholder="Введите рост">
+            </div>
+          </div>
 
-  <div class="form-group row">
-    <label for="InputWeight" class="col-sm-2 col-form-label">Вес</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control is-valid" name="InputWeight" placeholder="Введите вес">
-    </div>
-  </div>
+          <div class="form-group row">
+            <label for="InputWeight" class="col-sm-2 col-form-label">Вес</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control is-valid" name="InputWeight" placeholder="Введите вес">
+            </div>
+          </div>
 
-  <div class="form-group row">
-  <label for="InputSex" class="col-sm-2 col-form-label">Пол (муж/жен)</label>
-  <div class="col-sm-10">
-    <select class="form-control is-valid" name="InputSex">
-    <option selected>Выберите пол</option>
-      <option>муж</option>
-      <option>жен</option>
-    </select>
-    </div>
-  </div>
+          <div class="form-group row">
+            <label for="InputSex" class="col-sm-2 col-form-label">Пол (муж/жен)</label>
+            <div class="col-sm-10">
+              <select class="form-control is-valid" name="InputSex">
+                <option selected>Выберите пол</option>
+                <option>муж</option>
+                <option>жен</option>
+              </select>
+            </div>
+          </div>
 
-  <div class="form-group row">
-    <label for="InputRase" class="col-sm-2 col-form-label">Раса</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control is-valid" name="InputRase" placeholder="Введите расу">
-    </div>
-  </div>
+          <div class="form-group row">
+            <label for="InputRase" class="col-sm-2 col-form-label">Раса</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control is-valid" name="InputRase" placeholder="Введите расу">
+            </div>
+          </div>
 
-  <div class="form-group row">
-    <label for="InputDate" class="col-sm-2 col-form-label">Дата</label>
-    <div class="col-sm-10">
-      <input type="date" class="form-control is-valid" name="InputDate" id="davaToday" placeholder="">
-    </div>
-  </div>
+          <div class="form-group row">
+            <label for="InputDate" class="col-sm-2 col-form-label">Дата</label>
+            <div class="col-sm-10">
+              <input type="date" class="form-control is-valid" name="InputDate" id="davaToday" placeholder="">
+            </div>
+          </div>
 
-  <div class="form-group row">
-    <label for="InputNameDoctor" class="col-sm-2 col-form-label">Имя доктора</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control is-valid" name="InputNameDoctor" placeholder="Доктор Хаус">
-    </div>
+          <div class="form-group row">
+            <label for="InputNameDoctor" class="col-sm-2 col-form-label">Имя доктора</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control is-valid" name="InputNameDoctor" placeholder="Доктор Хаус">
+            </div>
+          </div>
+           <!-- next and prev 
+<div class="container">
+  <div class="container_buttons">
+      <div style="overflow:auto;">
+  <div style="float:right;">
+   <button type="button" id="prevBtn" onclick="nextPrev(-1)">Назад</button>
+   <button type="submit" class="btn-report" id="generate-pdf1">Сформировать отчет</button>
   </div>
-  <button type="submit" class="btn btn-report" id="generate-pdf1">Сформировать отчет</button>
+</div>
+                  </div>
         </div>
-<!--
+-->
+          <!--<button type="submit" class="btn btn-report" id="generate-pdf1">Сформировать отчет</button>-->
+        </div>
+        <!--
 
       <div class="form-group row">
         <label for="InputId" class="col-sm-2 col-form-label">ID*</label>
@@ -311,13 +376,27 @@
       </div>
     </div>
     -->
+        <!-- <input type="submit" value="Сформировать отчет" id="generate-pdf1">-->
+        
+        <!-- next and prev -->
+<!--<div class="container">-->
+  <div class="container container_buttons">
+      <div style="overflow:auto;">
+  <div style="float:right;">
+   <button type="button" id="prevBtn" onclick="nextPrev(-1)">Назад</button>
+   <button type="submit" class="btn-report" id="generate-pdf1">Сформировать отчет</button>
+  </div>
+</div>
+                  </div>
+        <!--</div>-->
+<!-- -->
+        
+    </section>
 
-   <!-- <input type="submit" value="Сформировать отчет" id="generate-pdf1">-->
-  </section>
-  
-  <?php 
+    <?php 
   $CurrentDate = date('j/m/Y');
   ?>
+  
   </form>
 
   <!--  -->
@@ -330,16 +409,16 @@
       transition: max-height 0.2s ease-out;
     }
   </style>
-  
+
   <!-- текущая дата в поле -->
   <script>
-document.getElementById('davaToday').valueAsDate = new Date();
-</script>
+    document.getElementById('davaToday').valueAsDate = new Date();
+  </script>
 
   <script>
     document.addEventListener('click', (e) => {
       // 
-      if(e.target && e.target.className == 'accordion'){
+      if (e.target && e.target.className == 'accordion') {
         e.preventDefault();
         let panel = e.target.nextElementSibling;
 
@@ -355,6 +434,7 @@ document.getElementById('davaToday').valueAsDate = new Date();
 
   <!-- JS -->
   <script type="module" src="js/app.js" async="true"></script>
+  <script src="js/steps.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
     integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -366,4 +446,5 @@ document.getElementById('davaToday').valueAsDate = new Date();
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.2/jspdf.plugin.autotable.min.js"></script> -->
   <!--<script src="js/form.js"></script>-->
 </body>
+
 </html>
