@@ -1,6 +1,12 @@
+<?php include './config.php';?>
+<?php session_start();
+ if($_SESSION['admin']!= "admin"){
+ header("Location: login.php");    
+exit; 
+} 
+?>  
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
   <meta charset="utf-8">
   <title>PharmacoGenomeX2 - форма</title>
@@ -12,14 +18,11 @@
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/form.css">
 </head>
-
 <body>
-  <?php include './config.php'; ?>
+    
   <!-- форма -->
   <!-- шаг 1 -->
-  
   <form action="report.php" method="POST" target="_blank" id="pdf-form">
-
     <section class="tab">
       <br>
       <div class="container">
@@ -38,7 +41,7 @@
         <div class="col-3">-->
           <!--<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">-->
           <div class="nav nav-pills" id="nav-tab" role="tablist">
-            <button type="button" class="nav-link-dis" id="v-pills-home-tab">Все</button>
+            <button type="button" class="nav-link-dis" id="v-pills-home-tab" data-category-id="0">Все</button>
 
             <?php
                   $statement = $pdo->prepare("SELECT * FROM category");
@@ -61,7 +64,7 @@
         <div class="container-main">
         <!-- выбираем маркер -->
         <div class="container container-marker">
-          <div class="col-6">
+          <div class="col-12">
             <div class="tab-content" id="v-pills-tabContent">
               <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
                 aria-labelledby="v-pills-home-tab">
@@ -101,9 +104,6 @@
 </div>
                   </div>
                   </div>
-                  
- <!-- -->
-   
     </section>
 
     <!-- Шаг 2 -->
@@ -121,7 +121,7 @@
           <div class="container container-main">
         <div class="row">
           <div class="col-3 specialization_name">
-          <div class="list">
+              <div class="list">
             <!-- кнопка -->
             <!--<input class="checkbox__modal" type="checkbox" name="psychiatry">-->
             <button type="button" id="flag" class="btn someclass" data-toggle="modal" data-target="#psychiatry"
@@ -167,7 +167,6 @@
           </div>
           
           <div class="step2-groups col">
-           
           </div>
         </div>
 
@@ -175,7 +174,7 @@
 #flag { cursor: pointer; }
 #flag.active {background: gray; color: #FFFFFF; border: solid 1px gray;}
   </style>
-            
+
       <!-- окно -->
       <?php 
        $statement = $pdo->prepare("SELECT * FROM category");
@@ -296,7 +295,7 @@
           <div class="form-group row">
             <label for="InputNameDoctor" class="col-sm-2 col-form-label">Имя доктора</label>
             <div class="col-sm-10">
-              <input type="text" class="form-control is-valid" name="InputNameDoctor" placeholder="Доктор Хаус">
+              <input type="text" class="form-control is-valid" name="InputNameDoctor" placeholder="" value="Заведующий лабораторией генетики и геномики Застрожин М.С.">
             </div>
           </div>
            <!-- next and prev 
@@ -395,8 +394,6 @@
 </div>
                   </div>
         <!--</div>-->
-<!-- -->
-        
     </section>
 
     <?php 
@@ -452,5 +449,4 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.2/jspdf.plugin.autotable.min.js"></script> -->
   <!--<script src="js/form.js"></script>-->
 </body>
-
 </html>
