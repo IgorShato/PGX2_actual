@@ -31,7 +31,7 @@ $(document).ready(function(){
   let getPillsCategories = () => {
     return Array.from(document.getElementsByClassName('nav-link')).map((item) => {
       return item.dataset.categoryId;
-    })
+    }) 
   }
 
   // load all genes
@@ -39,7 +39,7 @@ $(document).ready(function(){
   
   // get all genes
   let getGenesData = () => {
-    return Array.from(document.getElementsByClassName('list-group-item')).map((item) => {
+    return Array.from(document.getElementsByClassName('list-group-item-all')).map((item) => {
       return item.innerText;
     })
   }
@@ -72,10 +72,17 @@ $(document).ready(function(){
     displayTable($('.list-group.active').find('.list-group-item.active').text());
   })
 
-  // gene click event
-  $(document).on('click', '.list-group-item',  function(e) {
+  $(document).on('click', '.nav-link-dis', function(e){
     e.preventDefault();
+    $('.list-group.active').toggleClass('active');
+    $('.list-group[data-parent-id="'+ $(e.target).data('category-id') +'"]').toggleClass('active');
+    console.log('click');
+  })
 
+  // gene click event
+  $(document).on('click', '.list-group.active .list-group-item',  function(e) {
+    e.preventDefault();
+    console.log('ckicl');
     displayTable($(e.target).text());
   });
 
@@ -345,16 +352,16 @@ $(document).ready(function(){
         return 'Стандартная доза';
         break;
       case activityValue > 0 && activityValue <= 25:
-        return 'Снизить дозу на 25%';
+        return '<span style="color:#FF6C18;">Снизить дозу на 25%</span>';
         break;
       case activityValue >= 50:
-        return 'Заменить';
+        return '<span style="color:#FF1837;">Заменить</span>';
         break;
       case activityValue <= -25 && activityValue > -50:
-        return 'Повысить дозу на 25%';
+        return '<span style="color:#FF6C18;">Повысить дозу на 25%</span>';
         break;
       case activityValue <= -50:
-        return 'Заменить';
+        return '<span style="color:#FF1837;">Заменить</span>';
         break;
       default:
         break;
@@ -511,10 +518,54 @@ $(document).ready(function(){
   //   }); 
   // });
 
+  let dynamicArr = new Array();
+  let dynamicDrugGroups = new Array();
+  let dynamicFlag = false;
+
+  let dynamicText = () => {
+    clearArray(dynamicArr);
+    clearArray(dynamicDrugGroups);
+    dynamicFlag = false;
+
+    for (let i = 0; i < columns.length; i++){
+      if (columns[i][5] != 'N'){
+        dynamicArr.indexOf(columns[i][0]) === -1 ? dynamicArr.push(columns[i][0]) : '';
+
+        if (dynamicFlag == false){
+          dynamicFlag = true;
+        }
+      }
+    }
+
+    if (dynamicFlag == true){
+      for (let i = 0; i < drugsArr.length; i++){
+        for (let j = 0; j < drugsArr[i].categories.length; j++){
+          for (let k = 0; k < drugsArr[i].categories[j].drugs.length; k++){
+            let dynamicEnzym = drugsArr[i].categories[j].drugs[k].enzyme.split(',');
+
+            dynamicEnzym.forEach(element => {
+              let dynIndex = dynamicArr.indexOf(element)
+
+              console.log(element);
+              console.log(dynamicDrugGroups);
+              if (dynIndex != -1 && dynamicDrugGroups.indexOf(drugsArr[i].drugGroup.toLowerCase()) == -1){
+                dynamicDrugGroups.push(drugsArr[i].drugGroup.toLowerCase());
+              }
+            });
+          }
+        }
+      }
+    }
+  }
+
   document.getElementById('generate-pdf1').addEventListener('click',  function(e) {
     e.preventDefault();
 
     let formData = $('#pdf-form').serialize();
+    dynamicText();
+
+    console.log(dynamicFlag);
+    console.log(dynamicDrugGroups);
 
     $.ajax({   
       url: 'report.php',
@@ -526,7 +577,8 @@ $(document).ready(function(){
         formData: formData,
         columns: columns,
         drugs: drugsArr,
-        kPolSum: kPolSumArr
+        kPolSum: kPolSumArr,
+        dynamicText: {flag: dynamicFlag, dynamicDrugGroups: dynamicDrugGroups}
       },
       success: function(res){
         console.log(res);
@@ -544,9 +596,10 @@ $(document).ready(function(){
     }); 
   });
   
-   $('.list').on('click', '#flag', function(){
+  $('.list').on('click', '#flag', function(){
     $('.list #flag').removeClass('active');
     $(this).addClass('active');
-}); 
+});
+  
 }); 
 
