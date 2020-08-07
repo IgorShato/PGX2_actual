@@ -30,7 +30,9 @@ body {
   clear: both;
 }
 .list-group.active{
-  display: block;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 .list-group{
   display: none;
@@ -44,9 +46,11 @@ body {
   width: 150px;
   text-align: center;
   border: solid 1px #757575;
-  margin-bottom: 2px;
+
 }
 .list-group-item {
+  margin-bottom: 6px !important;
+  margin-right: 6px;
   color: #000000;
   width: 150px;
   text-align: center;
@@ -83,8 +87,6 @@ body {
     width: 720px;
     overflow-y: scroll;
     overflow-x: hidden;
-    /*position: static;*/
-    margin-left: 175px;
     background-color: #D7E2E1;
     border: solid 1px gray;
   }
@@ -94,15 +96,9 @@ body {
   /* list for genes */
   .list-group__container {
     height: 520px;
-    /*overflow-y: auto;*/
+    overflow-y: auto;
     /*cursor: pointer;*/
     /*position: static;*/
-    -moz-column-width: 80px;  
-    -webkit-column-width: 80px;   
-    column-width: 80px;
-    -webkit-column-count:2;  
-    -moz-column-count:2;  
-    column-count:2; 
     z-index: 1;
   }
   /* 
@@ -180,6 +176,10 @@ input[type="checkbox"] {
 .someclass:hover {
   background-color: #90ADA9;
   border: solid 1px #90ADA9;
+}
+.someclass:focus {
+  outline: none;
+  box-shadow: 0 0 0 1px #90ADA9;
 }
 /* accordion */
 .accordion {
@@ -260,6 +260,7 @@ input.invalid {
   border: solid 1px #4B7872;
   cursor: pointer;
 }
+
 /* form fields */
 legend {
   color: #FFFFFF;
