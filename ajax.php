@@ -6,6 +6,7 @@
   if ($action == 'loadCategories'){
     $data = $_POST['data'];
     $output = '';
+    $allCats = '';
 
     foreach ($data as $key => $value){
       $statement = $pdo->prepare("SELECT Gene FROM polymorphisms WHERE idCategory = :idCategory GROUP BY Gene ORDER BY 'ID_Gene'");
@@ -21,11 +22,20 @@
         <a class="list-group-item list-group-item-action '.($key1 == 0 ? 'active' : '').'"
         id="list-transport-list1" data-toggle="list" href="#list-transport1"
         role="tab" aria-controls="transport1">'.$value1['Gene'].'</a>';
+
+        $allCats .= '
+        <a class="list-group-item list-group-item-action list-group-item-all"
+        id="list-transport-list1" data-toggle="list" href="#list-transport1"
+        role="tab" aria-controls="transport1">'.$value1['Gene'].'</a>';
       }
 
       $output .= '
         </div>';
     }
+
+    $output .= '<div class="list-group" id="list-tab-all" role="tablist" data-parent-id="0">';
+    $output .= $allCats;
+    $output .= '</div>';
 
     echo json_encode(array('type' => 'categories', 'data' => $output));
   }else if ($action == 'loadTable'){
