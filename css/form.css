@@ -161,6 +161,12 @@ input[type="checkbox"] {
   margin-left: 5px;
   margin-right: 5px;
   background-color: #FFFFFF;
+  cursor: pointer;
+}
+.nav-link-dis.active {
+  background-color: #4B7872!important;
+  border: solid 1px #757575;
+  color: #FFFFFF;
 }
 /* buttons */
 .someclass {
