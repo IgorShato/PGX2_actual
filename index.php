@@ -41,7 +41,7 @@ exit;
         <div class="col-3">-->
           <!--<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">-->
           <div class="nav nav-pills" id="nav-tab" role="tablist">
-            <button type="button" class="nav-link-dis" id="v-pills-home-tab" data-category-id="0">Все</button>
+            <button type="button" class="nav-link-dis" id="v-pills-home-tab" data-toggle="pill" data-category-id="0">Все</button>
 
             <?php
                   $statement = $pdo->prepare("SELECT * FROM category");
